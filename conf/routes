@@ -6,6 +6,10 @@
 # quando a pagina de login retornar OK para ai eu chamo o controllers.Application.index()
 GET     /login                           controllers.Login.show()
 POST    /login                           controllers.Login.authenticate()
+
+# Registro
+GET     /registrar                       controllers.Registro.show()
+POST    /registrar                       controllers.Registro.registrar()
  
 # Home page
 GET     /                           controllers.Application.index()

@@ -30,6 +30,8 @@ public class Application extends Controller {
 
 			criouEventosFake = true;
 		}
+		// isso é só pra fim de testes, depois tem que achar um lugar pra apagar isso. 
+		session().clear();
         return ok(index.render());
     }
 
