@@ -29,7 +29,7 @@ public class EventoController extends Controller {
 	
 		List<Evento> todosEventos = Application.getDao().findAllByClassName("Evento");
 		
-		List<Evento> eventosRequeridos = new ArrayList<>();
+		List<Evento> eventosRequeridos = new ArrayList<Evento>();
 		
 		for (Evento ev : todosEventos) {
 			if (ev.getTemas().contains(Tema.values()[(int) id])){
