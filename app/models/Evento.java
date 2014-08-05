@@ -41,12 +41,12 @@ public class Evento {
 	private Date data;
 
 	@OneToMany(mappedBy = "evento")
-	private List<Participante> participantes = new ArrayList<>();
+	private List<Participante> participantes = new ArrayList<Participante>();
 
 	@ElementCollection
 	@Enumerated(value = EnumType.ORDINAL)
 	@NotNull
-	private List<Tema> temas = new ArrayList<>();
+	private List<Tema> temas = new ArrayList<Tema>();
 
 	public Evento() {
 	}
