@@ -38,6 +38,11 @@ public class Usuario {
 		return pass;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [email=" + email + ", nome=" + nome + "]";
+	}
+
 	public void setPass(String pass) {
 		this.pass = pass;
 	}

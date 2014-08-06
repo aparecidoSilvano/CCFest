@@ -28,6 +28,7 @@ public class Application extends Controller {
 			List<Evento> eventos = criarEventosFakes();
 			criarParticipacoesFake(eventos);
 
+			System.out.println(session().get("user"));
 			criouEventosFake = true;
 		}
 		// isso é só pra fim de testes, depois tem que achar um lugar pra apagar isso. 
