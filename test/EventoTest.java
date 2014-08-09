@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import models.Evento;
+import models.Local;
 import models.Tema;
 import models.exceptions.EventoInvalidoException;
 
@@ -23,11 +24,18 @@ public class EventoTest {
 	}
 	
 	@Test
+	public void deveCriarEventoComLocal(){
+		Local auditorio = new Local("auditorio-ufcg", 300, "auditorio principal da ufcg");
+//		Evento e = new Evento("Python na cabeça", "Vamos programar em Python!", new Date(), temas, auditorio);
+		
+	}
+	
+	@Test
 	public void deveCriarUmEvento() {
 		temas.add(Tema.ARDUINO);
 		try {
 			new Evento("Python na cabeça", "Vamos programar em Python!", new Date(), temas);
-		} catch (EventoInvalidoException _) {
+		} catch (EventoInvalidoException e) {
 			fail();
 		}
 	}

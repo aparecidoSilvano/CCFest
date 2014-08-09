@@ -1,6 +1,7 @@
 package controllers;
 
 import static play.data.Form.form;
+
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -38,6 +39,15 @@ public class Registro extends Controller {
     }
 	
 	private static boolean validate(String email) {
-		return false;
+		boolean status = false;
+
+		final String[] emails = email.split(",");
+		for (String emailAux : emails) {
+			emailAux = emailAux.replace(" ", "");
+			if (emailAux.matches(".+@.+\\.[a-z]+")) {
+				status = true;
+			}
+		}
+		return status;
 	}
 }

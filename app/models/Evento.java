@@ -20,13 +20,16 @@ import models.exceptions.EventoInvalidoException;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Required;
 
-@Entity
+@Entity(name="Evento")
 public class Evento {
 
 	@Id
 	@GeneratedValue
 	private long id;
-
+	
+	
+	private Usuario Adimnistrador;
+	
 	@Required
 	@MaxLength(value = 40)
 	private String titulo;
@@ -41,7 +44,8 @@ public class Evento {
 	private Date data;
 
 	@OneToMany(mappedBy = "evento")
-	private List<Participante> participantes = new ArrayList<Participante>();
+	private List<Usuario> participantes = new ArrayList<Usuario>();
+//	private List<Participante> participantes = new ArrayList<Participante>();
 
 	@ElementCollection
 	@Enumerated(value = EnumType.ORDINAL)
@@ -113,5 +117,19 @@ public class Evento {
 		if (temas.size() == 0)
 			throw new EventoInvalidoException("Nenhum tema");
 		this.temas = temas;
+	}
+
+	/**
+	 * @return the adimnistrador
+	 */
+	public Usuario getAdimnistrador() {
+		return Adimnistrador;
+	}
+
+	/**
+	 * @param adimnistrador the adimnistrador to set
+	 */
+	public void setAdimnistrador(Usuario adimnistrador) {
+		Adimnistrador = adimnistrador;
 	}
 }

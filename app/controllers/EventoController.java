@@ -8,8 +8,8 @@ import java.util.List;
 
 import models.Evento;
 import models.EventoComparator;
-import models.Participante;
 import models.Tema;
+import models.Usuario;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.PessoaInvalidaException;
 import play.data.Form;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EventoController extends Controller {
 
 	private final static Form<Evento> EVENTO_FORM = form(Evento.class);
-	private final static Form<Participante> participanteForm = form(Participante.class);
+	private final static Form<Usuario> participanteForm = form(Usuario.class);
 
 	@Transactional
 	public static Result eventosPorTema(int id) throws PessoaInvalidaException, EventoInvalidoException{
@@ -68,19 +68,22 @@ public class EventoController extends Controller {
 	
 	@Transactional
 	public static Result participar(long id) throws PessoaInvalidaException, EventoInvalidoException{
-		Form<Participante> participanteFormRequest = participanteForm.bindFromRequest();
+		Form<Usuario> participanteFormRequest = participanteForm.bindFromRequest();
 		
-		if (participanteForm.hasErrors()) {
+		// ver uma forma de fazer isso.
+		
+		/*if (participanteForm.hasErrors()) {
 			return badRequest();
 		} else {
 			Evento evento = Application.getDao().findByEntityId(Evento.class, id);
-			Participante novoParticipante = participanteFormRequest.get();
+			Usuario novoParticipante = participanteFormRequest.get();
 			novoParticipante.setEvento(evento);
 			
 			Application.getDao().persist(novoParticipante);
 			Application.getDao().merge(novoParticipante);
 			Application.getDao().flush();
 			return redirect(controllers.routes.Application.index());
-		}
+		}*/
+		return redirect(controllers.routes.Application.index());
 	}
 }
