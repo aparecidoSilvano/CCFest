@@ -27,8 +27,8 @@ public class Evento {
 	@GeneratedValue
 	private long id;
 	
-	
-	private Usuario Adimnistrador;
+	@NotNull
+//	private Usuario Adimnistrador;
 	
 	@Required
 	@MaxLength(value = 40)
