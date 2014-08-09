@@ -4,7 +4,7 @@
 
 # Abre primeiramente a pagina de login
 # quando a pagina de login retornar OK para ai eu chamo o controllers.Application.index()
-GET     /login                           controllers.Login.show()
+GET     /login                           controllers.Login.showLogin()
 POST    /login                           controllers.Login.authenticate()
 
 # Registro

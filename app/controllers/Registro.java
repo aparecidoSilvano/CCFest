@@ -30,9 +30,10 @@ public class Registro extends Controller {
             return badRequest(registro.render(registroForm));
         } else {
         	dao.persist(u);
-            return redirect(
-                routes.Login.show()
-            );
+        	
+        	// limpa a session pra garantir que eu possa fazer o login novamente.
+        	session().clear();
+            return redirect(routes.Login.showLogin());
         }
     }
 	

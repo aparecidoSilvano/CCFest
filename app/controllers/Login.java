@@ -31,19 +31,18 @@ public class Login extends Controller {
 		dao.persist(u1);	dao.persist(u2);	dao.persist(u3);	dao.persist(u4);
 		dao.persist(u5);	dao.persist(u6);
 	}
-	
+
 	@Transactional
-    public static Result show() {
+	public static Result showLogin() {
 		povoaBD();		
 		if (session().get("user") != null) {
 			return redirect(routes.Application.index());
 		}
         return ok(login.render(loginForm));
-    }
+	}
 	
 	@Transactional
 	public static Result authenticate() {
-		System.out.println("entrou no authenticate");
 		Usuario u = loginForm.bindFromRequest().get();
 		
 		String email = u.getEmail();
