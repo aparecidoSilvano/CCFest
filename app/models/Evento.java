@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,7 @@ import models.exceptions.EventoInvalidoException;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Required;
 
-@Entity()
+@Entity(name = "Evento")
 public class Evento {
 
 	@Id
@@ -40,13 +41,16 @@ public class Evento {
 	@Required
 	private Date data;
 
-//	@OneToMany(mappedBy = "evento")
-//	private List<Usuario> participantes = new ArrayList<Usuario>();
+	@OneToMany(targetEntity = Usuario.class)
+	private List<Usuario> participantes = new ArrayList<Usuario>();
 
 	@ElementCollection
 	@Enumerated(value = EnumType.ORDINAL)
 	@NotNull
 	private List<Tema> temas = new ArrayList<Tema>();
+	
+	@OneToOne(targetEntity = Local.class)
+	private Local local = new Local();
 
 	public Evento() {
 	}
@@ -75,10 +79,7 @@ public class Evento {
 		return id;
 	}
 
-	public Integer getTotalDeParticipantes() {
-//		return participantes.size();
-		return 10;
-	}
+
 
 	public List<Tema> getTemas() {
 		return temas;
@@ -114,5 +115,31 @@ public class Evento {
 		if (temas.size() == 0)
 			throw new EventoInvalidoException("Nenhum tema");
 		this.temas = temas;
+	}
+
+	/**
+	 * @return the local
+	 */
+	public Local getLocal() {
+		return local;
+	}
+
+	/**
+	 * @param local the local to set
+	 */
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+	
+	public Integer getTotalDeParticipantes() {
+		return participantes.size();
+	}
+
+	public List<Usuario> getParticipantes() {
+		return participantes;
+	}
+	
+	public void setParticipantes(List<Usuario> participantes) {
+		this.participantes = participantes;
 	}
 }

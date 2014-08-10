@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,15 +18,15 @@ import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
 
-@Entity()
+@Entity(name = "Usuario")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-//	@OneToMany(mappedBy = "usuario")
-//	private List<Evento> eventosAdim = new ArrayList<Evento>();
+	@OneToMany(targetEntity = Evento.class)
+	private List<Evento> eventosAdim = new ArrayList<Evento>();
 	
 	@Email
 	@MaxLength(value = 70)
@@ -72,5 +73,13 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Evento> getEventosAdim() {
+		return eventosAdim;
+	}
+
+	public void setEventosAdim(List<Evento> eventosAdim) {
+		this.eventosAdim = eventosAdim;
 	}
 }
