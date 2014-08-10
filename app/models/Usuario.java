@@ -1,49 +1,48 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
-import java.util.List;
+import org.hibernate.validator.constraints.Email;
 
-@Entity(name="Usuario")
+import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.MinLength;
+import play.data.validation.Constraints.Required;
+
+@Entity()
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@OneToMany(mappedBy = "evento")
-	private List<Evento> eventosAdim = new ArrayList<Evento>();
+//	@OneToMany(mappedBy = "usuario")
+//	private List<Evento> eventosAdim = new ArrayList<Evento>();
 	
-	/**
-	 * Retorna a lista de eventos que esse usuario é o adiministrador.
-	 * @return
-	 */
-	public List<Evento> getEventosAdim() {
-		return Collections.unmodifiableList(eventosAdim);
-	}
-
-	public void setEventosAdim(List<Evento> eventosAdim) {
-		this.eventosAdim = eventosAdim;
-	}
-
+	@Email
+	@MaxLength(value = 70)
 	private String email;
+	
 	private String pass;
-	private String nome;
+	
+	@MaxLength(value = 70)
+	private String nome = "";
 	
 	public Usuario() {
 	}
 	
 	public Usuario(String email, String pass, String nome) {
-		this.email = email;
-		this.nome = nome;
-		this.pass = pass;
+		setEmail(email);
+		setNome(nome);
+		setPass(pass);
 	}
 
 	public String getEmail() {

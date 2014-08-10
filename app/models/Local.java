@@ -2,14 +2,16 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name="Usuario")
+@Entity()
 public class Local {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 
+	
 	private String nome;
 	private int capacidade;
 	private String descricao;
