@@ -50,6 +50,7 @@ public class Evento {
 	@NotNull
 	private List<Tema> temas = new ArrayList<Tema>();
 	
+	
 	@OneToOne(targetEntity = Local.class, cascade = CascadeType.ALL)
 	private Local local = new Local();
 
