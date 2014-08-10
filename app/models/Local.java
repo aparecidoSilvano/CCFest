@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import play.data.validation.Constraints.Required;
+
 @Entity
 public class Local {
 	@Id
@@ -12,32 +14,36 @@ public class Local {
 	private long id;
 
 	
-	private String nome;
+	private String nomeLocal;
+	
+	
 	private int capacidade;
-	private String descricao;
+	
+	
+	private String comoChegar;
 	
 	public Local(){
 		
 	}
 	
 	public Local(String nome, int capacidade, String descricao) {
-		setNome(nome);
+		setNomeLocal(nome);
 		setCapacidade(capacidade);
-		setDescricao(descricao);
+		setComoChegar(descricao);
 	}
 
 	/**
 	 * @return the nome
 	 */
-	public String getNome() {
-		return nome;
+	public String getNomeLocal() {
+		return nomeLocal;
 	}
 
 	/**
 	 * @param nome the nome to set
 	 */
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeLocal(String nome) {
+		this.nomeLocal = nome;
 	}
 
 	/**
@@ -54,18 +60,24 @@ public class Local {
 		this.capacidade = capacidade;
 	}
 
+	@Override
+	public String toString() {
+		return "Local [nome=" + nomeLocal + ", capacidade=" + capacidade
+				+ ", descricao=" + comoChegar + "]";
+	}
+
 	/**
 	 * @return the descricao
 	 */
-	public String getDescricao() {
-		return descricao;
+	public String getComoChegar() {
+		return comoChegar;
 	}
 
 	/**
 	 * @param descricao the descricao to set
 	 */
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setComoChegar(String descricao) {
+		this.comoChegar = descricao;
 	}
 
 }

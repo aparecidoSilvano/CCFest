@@ -20,7 +20,6 @@ public class Application extends Controller {
 		povoaBD();
 //		session().clear();
 		List<Usuario> lista = dao.findByAttributeName("Usuario", "nome", session().get("user"));
-		System.out.println("quantidade de usuarios cadastrados no bd " + dao.findAllByClassName("Usuario").size());
 		System.out.println(lista);
 		
 		if(lista == null || lista.isEmpty()){

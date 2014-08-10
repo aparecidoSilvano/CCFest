@@ -54,11 +54,14 @@ public class EventoController extends Controller {
 	@Transactional
 	public static Result novo() throws PessoaInvalidaException, EventoInvalidoException{
 		Form<Evento> eventoFormRequest = EVENTO_FORM.bindFromRequest();
-
+		
+		System.out.println("tem erros no formulario " + EVENTO_FORM.hasErrors());
 		if (EVENTO_FORM.hasErrors()) {
 			return badRequest();
 		} else {
 			Evento novoEvento = eventoFormRequest.get();
+			System.out.println(novoEvento);
+			
 			Application.getDao().persist(novoEvento);
 			Application.getDao().merge(novoEvento);
 			Application.getDao().flush();

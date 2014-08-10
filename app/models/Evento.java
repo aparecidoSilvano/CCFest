@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class Evento {
 	@Required
 	@MaxLength(value = 40)
 	private String titulo;
-
+	
 	@Required
 	@MaxLength(value = 450)
 	@Column(name = "CONTENT", length = 450)
@@ -49,18 +50,19 @@ public class Evento {
 	@NotNull
 	private List<Tema> temas = new ArrayList<Tema>();
 	
-	@OneToOne(targetEntity = Local.class)
+	@OneToOne(targetEntity = Local.class, cascade = CascadeType.ALL)
 	private Local local = new Local();
 
 	public Evento() {
 	}
 
-	public Evento(String titulo, String descricao, Date data, List<Tema> temas)
+	public Evento(String titulo, String descricao, Date data, String nomeLocal, int capacidade, String comoChegar, List<Tema> temas)
 			throws EventoInvalidoException {
 		setTitulo(titulo);
 		setDescricao(descricao);
 		setData(data);
 		setTemas(temas);
+		local = new Local(nomeLocal, capacidade, comoChegar);
 	}
 
 	public String getTitulo() {
@@ -141,5 +143,12 @@ public class Evento {
 	
 	public void setParticipantes(List<Usuario> participantes) {
 		this.participantes = participantes;
+	}
+
+	@Override
+	public String toString() {
+		return "Evento [titulo=" + titulo + ", descricao=" + descricao
+				+ ", data=" + data + ", participantes=" + participantes
+				+ ", temas=" + temas + ", local=" + local + "]";
 	}
 }
