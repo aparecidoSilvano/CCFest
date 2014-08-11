@@ -15,13 +15,18 @@ public class Application extends Controller {
 	private static GenericDAO dao = new GenericDAOImpl();
 	private static Usuario usuarioLogado;
 	
+	
+	public static Usuario getUsuarioLogado(){
+		// veja que isso pode talvez quem sabe um dia retornar null.
+		return usuarioLogado;		
+	}
+	
 	@Transactional
     public static Result index(){
 		povoaBD();
 //		session().clear();
 		List<Usuario> lista = dao.findByAttributeName("Usuario", "nome", session().get("user"));
-		System.out.println(lista);
-		
+	
 		if(lista == null || lista.isEmpty()){
 			// para o caso de não haver um usuario logado eu mando ele entrar no sistema.
 			return Login.showLogin();

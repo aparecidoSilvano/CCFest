@@ -45,8 +45,11 @@ $(document).on('ready', function(event) {
 							modal.find('.modal-titulo-evento').html(infoEvento.titulo);
 							modal.find('.modal-descricao-evento').html(infoEvento.descricao);
 							modal.find('.modal-data-evento').val(new Date(infoEvento.data).toLocaleDateString());
-							modal.find('.modal-total-evento').val(infoEvento.totalDeParticipantes);
-							
+							modal.find('.modal-total-evento').val(infoEvento.totalDeParticipantes);							
+							modal.find('.modal-local-evento').val(infoEvento.local.nomeLocal);
+							modal.find('.modal-local-capacidade').val(infoEvento.local.capacidade);
+							modal.find('.modal-local-como-chegar').val(infoEvento.local.comoChegar);							
+							console.log("qualquer coisa");
 							modal.modal('show');
 						});
 						

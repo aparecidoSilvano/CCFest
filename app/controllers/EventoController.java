@@ -2,14 +2,20 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import models.Evento;
 import models.EventoComparator;
+import models.Local;
 import models.Participante;
 import models.Tema;
+import models.Usuario;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.PessoaInvalidaException;
 import play.data.Form;
@@ -22,7 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class EventoController extends Controller {
 
 	private final static Form<Evento> EVENTO_FORM = form(Evento.class);
-	private final static Form<Participante> participanteForm = form(Participante.class);
+//	private final static Form<Participante> participanteForm = form(Participante.class);
 
 	@Transactional
 	public static Result eventosPorTema(int id) throws PessoaInvalidaException, EventoInvalidoException{
@@ -54,13 +60,21 @@ public class EventoController extends Controller {
 	@Transactional
 	public static Result novo() throws PessoaInvalidaException, EventoInvalidoException{
 		Form<Evento> eventoFormRequest = EVENTO_FORM.bindFromRequest();
+				
+		// Para recuperar os valores do local.
+		String nomeLocal = eventoFormRequest.field("nomeLocal").value();
+		String comoChegar = eventoFormRequest.field("comoChegar").value();
+		int capacidade = Integer.valueOf(eventoFormRequest.field("capacidade").value());
 		
-		System.out.println("tem erros no formulario " + EVENTO_FORM.hasErrors());
+		Local local = new Local(nomeLocal, capacidade, comoChegar);
+		System.out.println("infos about location nome " + nomeLocal + 
+				" capacidade " + capacidade + " como chegar " + comoChegar );
+		
 		if (EVENTO_FORM.hasErrors()) {
 			return badRequest();
 		} else {
 			Evento novoEvento = eventoFormRequest.get();
-			System.out.println(novoEvento);
+			novoEvento.setLocal(local);
 			
 			Application.getDao().persist(novoEvento);
 			Application.getDao().merge(novoEvento);
@@ -71,7 +85,22 @@ public class EventoController extends Controller {
 	
 	@Transactional
 	public static Result participar(long id) throws PessoaInvalidaException, EventoInvalidoException{
-		Form<Participante> participanteFormRequest = participanteForm.bindFromRequest();
+		System.out.println("entrou no metodo participar.");
+		// A ideia aqui é só pegar o usuario logado e adicionar esse user na lista do evento.
+		Usuario usuarioLogado = Application.getUsuarioLogado();
+		
+		Evento evento = Application.getDao().findByEntityId(Evento.class, id);
+		
+		if(evento.addParticipante(usuarioLogado)){
+			Application.getDao().merge(evento);
+			Application.getDao().flush();
+			return redirect(controllers.routes.Application.index());
+		}else{
+			return badRequest();
+		}
+		
+		
+		/*Form<Participante> participanteFormRequest = participanteForm.bindFromRequest();
 		
 		if (participanteForm.hasErrors()) {
 			return badRequest();
@@ -84,6 +113,6 @@ public class EventoController extends Controller {
 			Application.getDao().merge(novoParticipante);
 			Application.getDao().flush();
 			return redirect(controllers.routes.Application.index());
-		}
+		}*/
 	}
 }

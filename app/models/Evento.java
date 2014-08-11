@@ -52,18 +52,21 @@ public class Evento {
 	
 	
 	@OneToOne(targetEntity = Local.class, cascade = CascadeType.ALL)
-	private Local local = new Local();
+	private Local local;
 
 	public Evento() {
 	}
 
 	public Evento(String titulo, String descricao, Date data, String nomeLocal, int capacidade, String comoChegar, List<Tema> temas)
 			throws EventoInvalidoException {
+		
 		setTitulo(titulo);
 		setDescricao(descricao);
 		setData(data);
 		setTemas(temas);
+		System.out.println("nome local = " + nomeLocal + " capacidade " + capacidade + " como chegar " + comoChegar);
 		local = new Local(nomeLocal, capacidade, comoChegar);
+		
 	}
 
 	public String getTitulo() {
@@ -144,6 +147,18 @@ public class Evento {
 	
 	public void setParticipantes(List<Usuario> participantes) {
 		this.participantes = participantes;
+	}
+	
+	public boolean addParticipante(Usuario usuario){
+		// porém só posso adicionar um user se a capacidade do local permitir.
+		boolean status = false;
+		if(getLocal().getCapacidade() < participantes.size()){
+			this.participantes.add(usuario);
+			status = true;
+		}else{
+			status = false;
+		}
+		return status;
 	}
 
 	@Override
