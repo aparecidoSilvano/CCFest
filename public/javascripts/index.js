@@ -48,8 +48,8 @@ $(document).on('ready', function(event) {
 							modal.find('.modal-total-evento').val(infoEvento.totalDeParticipantes);							
 							modal.find('.modal-local-evento').val(infoEvento.local.nomeLocal);
 							modal.find('.modal-local-capacidade').val(infoEvento.local.capacidade);
-							modal.find('.modal-local-como-chegar').val(infoEvento.local.comoChegar);							
-							console.log("qualquer coisa");
+							modal.find('.modal-local-como-chegar').val(infoEvento.local.comoChegar);	
+//							modal.find('.modal-prioritario').val(infoEvento.); ???
 							modal.modal('show');
 						});
 						

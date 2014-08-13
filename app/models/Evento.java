@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import models.exceptions.EventoInvalidoException;
+import models.exceptions.InpossivelAddParticipante;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Required;
 
@@ -53,20 +54,23 @@ public class Evento {
 	
 	@OneToOne(targetEntity = Local.class, cascade = CascadeType.ALL)
 	private Local local;
+	
+	@OneToOne(targetEntity = GerenciadorDeParticipacao.class, cascade = CascadeType.ALL)
+	private GerenciadorDeParticipacao gerenciadorDeParticipacao;
 
 	public Evento() {
 	}
 
-	public Evento(String titulo, String descricao, Date data, String nomeLocal, int capacidade, String comoChegar, List<Tema> temas)
-			throws EventoInvalidoException {
+	
+	public Evento(String titulo, String descricao, Date data, Local local,
+			List<Tema> temas, GerenciadorDeParticipacao gerente) throws EventoInvalidoException {
 		
 		setTitulo(titulo);
 		setDescricao(descricao);
 		setData(data);
+		setLocal(local);
 		setTemas(temas);
-		System.out.println("nome local = " + nomeLocal + " capacidade " + capacidade + " como chegar " + comoChegar);
-		local = new Local(nomeLocal, capacidade, comoChegar);
-		
+		setGerenteParticipacao(gerente);
 	}
 
 	public String getTitulo() {
@@ -123,16 +127,10 @@ public class Evento {
 		this.temas = temas;
 	}
 
-	/**
-	 * @return the local
-	 */
 	public Local getLocal() {
 		return local;
 	}
 
-	/**
-	 * @param local the local to set
-	 */
 	public void setLocal(Local local) {
 		this.local = local;
 	}
@@ -145,22 +143,19 @@ public class Evento {
 		return participantes;
 	}
 	
-	public void setParticipantes(List<Usuario> participantes) {
-		this.participantes = participantes;
-	}
-	
-	public boolean addParticipante(Usuario usuario){
-		// porém só posso adicionar um user se a capacidade do local permitir.
-		boolean status = false;
-		if(getLocal().getCapacidade() < participantes.size()){
-			this.participantes.add(usuario);
-			status = true;
-		}else{
-			status = false;
-		}
-		return status;
+	public void addParticipante(Usuario participante) throws InpossivelAddParticipante {
+		gerenciadorDeParticipacao.addParticipante(this, participante);
 	}
 
+	public GerenciadorDeParticipacao getGerenciadorDeParticipacao() {
+		return gerenciadorDeParticipacao;
+	}
+
+	public void setGerenteParticipacao(
+			GerenciadorDeParticipacao gerenciadorDeParticipacao) {
+		this.gerenciadorDeParticipacao = gerenciadorDeParticipacao;
+	}
+	
 	@Override
 	public String toString() {
 		return "Evento [titulo=" + titulo + ", descricao=" + descricao

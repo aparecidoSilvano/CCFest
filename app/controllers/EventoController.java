@@ -2,21 +2,24 @@ package controllers;
 
 import static play.data.Form.form;
 
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import models.Evento;
 import models.EventoComparator;
+import models.GerenciadorDeParticipacao;
+import models.GerentePrioridadeExperiencia;
 import models.Local;
-import models.Participante;
 import models.Tema;
 import models.Usuario;
+import models.gerenteNormal;
 import models.exceptions.EventoInvalidoException;
+import models.exceptions.InpossivelAddParticipante;
 import models.exceptions.PessoaInvalidaException;
 import play.data.Form;
 import play.db.jpa.Transactional;
@@ -58,24 +61,41 @@ public class EventoController extends Controller {
 	}
 	
 	@Transactional
-	public static Result novo() throws PessoaInvalidaException, EventoInvalidoException{
+	public static Result novo() throws PessoaInvalidaException, EventoInvalidoException, ParseException{
 		Form<Evento> eventoFormRequest = EVENTO_FORM.bindFromRequest();
 				
 		// Para recuperar os valores do local.
+		String titulo = eventoFormRequest.field("titulo").value();
+		String descricao = eventoFormRequest.field("descricao").value();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date data =  df.parse(eventoFormRequest.field("data").value());
 		String nomeLocal = eventoFormRequest.field("nomeLocal").value();
 		String comoChegar = eventoFormRequest.field("comoChegar").value();
 		int capacidade = Integer.valueOf(eventoFormRequest.field("capacidade").value());
+		boolean prioritario = eventoFormRequest.field("prioritario").equals("true");
 		
 		Local local = new Local(nomeLocal, capacidade, comoChegar);
-		System.out.println("infos about location nome " + nomeLocal + 
-				" capacidade " + capacidade + " como chegar " + comoChegar );
+		
+		List<Tema> temas = new ArrayList<Tema>();
+		for(Tema tema : Tema.values()) {
+			if (eventoFormRequest.field(tema.name()).value() != null && !eventoFormRequest.field(tema.name()).equals("null")) {
+				temas.add(tema);
+			}
+		}
+		
+		System.out.println("é prioritario " + prioritario);
+		GerenciadorDeParticipacao gerente;
+		if(prioritario){
+			gerente = new GerentePrioridadeExperiencia();
+		}else{
+			gerente = new gerenteNormal();
+		}
+		
+		Evento novoEvento = new Evento(titulo, descricao, data, local, temas, gerente);		
 		
 		if (EVENTO_FORM.hasErrors()) {
 			return badRequest();
 		} else {
-			Evento novoEvento = eventoFormRequest.get();
-			novoEvento.setLocal(local);
-			
 			Application.getDao().persist(novoEvento);
 			Application.getDao().merge(novoEvento);
 			Application.getDao().flush();
@@ -91,28 +111,14 @@ public class EventoController extends Controller {
 		
 		Evento evento = Application.getDao().findByEntityId(Evento.class, id);
 		
-		if(evento.addParticipante(usuarioLogado)){
+		try {
+			evento.addParticipante(usuarioLogado);
+			Application.getDao().merge(usuarioLogado);
 			Application.getDao().merge(evento);
 			Application.getDao().flush();
 			return redirect(controllers.routes.Application.index());
-		}else{
+		} catch (InpossivelAddParticipante e) {
 			return badRequest();
 		}
-		
-		
-		/*Form<Participante> participanteFormRequest = participanteForm.bindFromRequest();
-		
-		if (participanteForm.hasErrors()) {
-			return badRequest();
-		} else {
-			Evento evento = Application.getDao().findByEntityId(Evento.class, id);
-			Participante novoParticipante = participanteFormRequest.get();
-//			novoParticipante.setEvento(evento);
-			
-			Application.getDao().persist(novoParticipante);
-			Application.getDao().merge(novoParticipante);
-			Application.getDao().flush();
-			return redirect(controllers.routes.Application.index());
-		}*/
 	}
 }

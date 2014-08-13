@@ -37,6 +37,8 @@ public class Usuario {
 	@MaxLength(value = 70)
 	private String nome = "";
 	
+	private int numParticipacoes;
+	
 	public Usuario() {
 	}
 	
@@ -82,4 +84,19 @@ public class Usuario {
 	public void setEventosAdim(List<Evento> eventosAdim) {
 		this.eventosAdim = eventosAdim;
 	}
+
+	/**
+	 * @return the numParticipacoes
+	 */
+	public int getNumParticipacoes() {
+		return numParticipacoes;
+	}
+
+	/**
+	 * @param numParticipacoes the numParticipacoes to set
+	 */
+	public void incrementaParticipacoes() {
+		this.numParticipacoes++;
+	}
+	
 }
