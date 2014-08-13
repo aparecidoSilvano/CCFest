@@ -3,20 +3,17 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.OneToOne;
 
 import org.hibernate.validator.constraints.Email;
 
 import play.data.validation.Constraints.MaxLength;
-import play.data.validation.Constraints.MinLength;
-import play.data.validation.Constraints.Required;
 
 @Entity(name = "Usuario")
 public class Usuario {
@@ -38,6 +35,9 @@ public class Usuario {
 	private String nome = "";
 	
 	private int numParticipacoes;
+	
+	@OneToOne(targetEntity = GerenciadorExpereincia.class, cascade = CascadeType.ALL)
+	private GerenciadorExpereincia gerenExperiencia;
 	
 	public Usuario() {
 	}
@@ -97,6 +97,28 @@ public class Usuario {
 	 */
 	public void incrementaParticipacoes() {
 		this.numParticipacoes++;
+	}
+	
+	public int getExperiencia(){
+		return gerenExperiencia.calculaExperiencia(this);
+	}
+
+	/**
+	 * @return the gerenExperiencia
+	 */
+	public GerenciadorExpereincia getGerenExperiencia() {
+		return gerenExperiencia;
+	}
+	
+	/**
+	 * @param gerenExperiencia the gerenExperiencia to set
+	 */
+	public void setGerenExperiencia(GerenciadorExpereincia gerenExperiencia) {
+		this.gerenExperiencia = gerenExperiencia;
+	}
+	
+	public int getNumEventosAdim(){
+		return eventosAdim.size();
 	}
 	
 }
