@@ -18,16 +18,16 @@ public class GerentePrioridadeExperiencia extends GerenciadorDeParticipacao {
 			Collections.sort(evento.getParticipantes(),
 					new ExperienciaComparator());
 			int numParticipantes = evento.getTotalDeParticipantes();
-			if (evento.getParticipantes().get(numParticipantes)
+			if (evento.getParticipantes().get(numParticipantes -1)
 					.getExperiencia() < participante.getExperiencia()) {
-				evento.getParticipantes().remove(numParticipantes);
+				evento.getParticipantes().remove(numParticipantes -1);
 				evento.addParticipante(participante);
 
 				// reeordena a lista.
 				Collections.sort(evento.getParticipantes(),
 						new ExperienciaComparator());
 			} else {
-				throw new ImpossivelAddParticipante("O usuário não pode participar desse veneto.x	");
+				throw new ImpossivelAddParticipante("O usuário não possui experiência suficiente para participar desse evento");
 			}
 		}
 

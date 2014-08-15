@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import play.data.validation.Constraints.Required;
+import models.exceptions.LocalException;
 
 @Entity
 public class Local {
@@ -26,10 +26,10 @@ public class Local {
 		
 	}
 	
-	public Local(String nome, int capacidade, String descricao) {
+	public Local(String nome, int capacidade, String comoChegar) throws LocalException {
 		setNomeLocal(nome);
 		setCapacidade(capacidade);
-		setComoChegar(descricao);
+		setComoChegar(comoChegar);
 	}
 
 	/**
@@ -41,8 +41,14 @@ public class Local {
 
 	/**
 	 * @param nome the nome to set
+	 * @throws LocalException 
 	 */
-	public void setNomeLocal(String nome) {
+	public void setNomeLocal(String nome) throws LocalException {		
+		if(nome == null){
+			throw new LocalException("Parametro nulo");
+		}if(nome.length() == 0){
+			throw new LocalException("Parametro inválido");
+		}
 		this.nomeLocal = nome;
 	}
 
@@ -55,8 +61,12 @@ public class Local {
 
 	/**
 	 * @param capacidade the capacidade to set
+	 * @throws LocalException 
 	 */
-	public void setCapacidade(int capacidade) {
+	public void setCapacidade(int capacidade) throws LocalException {
+		if(capacidade < 0){
+			throw new LocalException("Parametro inválido");
+		}
 		this.capacidade = capacidade;
 	}
 
@@ -75,9 +85,15 @@ public class Local {
 
 	/**
 	 * @param descricao the descricao to set
+	 * @throws LocalException 
 	 */
-	public void setComoChegar(String descricao) {
-		this.comoChegar = descricao;
+	public void setComoChegar(String comoChegar) throws LocalException {
+		if(comoChegar == null){
+			throw new LocalException("Parametro nulo");
+		}if(comoChegar.length() == 0){
+			throw new LocalException("Parametro inválido");
+		}
+		this.comoChegar = comoChegar;
 	}
 
 }

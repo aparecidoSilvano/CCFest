@@ -131,7 +131,10 @@ public class Evento {
 		return local;
 	}
 
-	public void setLocal(Local local) {
+	public void setLocal(Local local) throws EventoInvalidoException {
+		if(local == null){
+			throw new EventoInvalidoException("Parametro nulo");
+		}
 		this.local = local;
 	}
 	
@@ -159,7 +162,10 @@ public class Evento {
 	}
 
 	public void setGerenteParticipacao(
-			GerenciadorDeParticipacao gerenciadorDeParticipacao) {
+			GerenciadorDeParticipacao gerenciadorDeParticipacao) throws EventoInvalidoException {
+		if(gerenciadorDeParticipacao == null){
+			throw new EventoInvalidoException("Parametro nulo");
+		}
 		this.gerenciadorDeParticipacao = gerenciadorDeParticipacao;
 	}
 	

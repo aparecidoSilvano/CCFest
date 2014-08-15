@@ -20,6 +20,7 @@ import models.Usuario;
 import models.gerenteNormal;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.ImpossivelAddParticipante;
+import models.exceptions.LocalException;
 import models.exceptions.PessoaInvalidaException;
 import play.data.Form;
 import play.db.jpa.Transactional;
@@ -61,7 +62,7 @@ public class EventoController extends Controller {
 	}
 	
 	@Transactional
-	public static Result novo() throws PessoaInvalidaException, EventoInvalidoException, ParseException{
+	public static Result novo() throws PessoaInvalidaException, EventoInvalidoException, ParseException, LocalException{
 		Form<Evento> eventoFormRequest = EVENTO_FORM.bindFromRequest();
 				
 		// Para recuperar os valores do local.
