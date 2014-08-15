@@ -19,7 +19,7 @@ import models.Tema;
 import models.Usuario;
 import models.gerenteNormal;
 import models.exceptions.EventoInvalidoException;
-import models.exceptions.InpossivelAddParticipante;
+import models.exceptions.ImpossivelAddParticipante;
 import models.exceptions.PessoaInvalidaException;
 import play.data.Form;
 import play.db.jpa.Transactional;
@@ -96,6 +96,10 @@ public class EventoController extends Controller {
 		if (EVENTO_FORM.hasErrors()) {
 			return badRequest();
 		} else {
+			// é necessario atualizar o contador do usuario que criou esse evento.
+			Usuario usuario = Application.getUsuarioLogado();
+			usuario.incrementaEventosAdim();
+			Application.getDao().merge(usuario);
 			Application.getDao().persist(novoEvento);
 			Application.getDao().merge(novoEvento);
 			Application.getDao().flush();
@@ -117,7 +121,7 @@ public class EventoController extends Controller {
 			Application.getDao().merge(evento);
 			Application.getDao().flush();
 			return redirect(controllers.routes.Application.index());
-		} catch (InpossivelAddParticipante e) {
+		} catch (ImpossivelAddParticipante e) {
 			return badRequest();
 		}
 	}

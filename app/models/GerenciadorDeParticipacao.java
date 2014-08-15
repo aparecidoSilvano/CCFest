@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import models.exceptions.InpossivelAddParticipante;
+import models.exceptions.ImpossivelAddParticipante;
 
 @Entity(name="GerenciadorDeParticipacao")
 public abstract class GerenciadorDeParticipacao {
@@ -13,6 +13,6 @@ public abstract class GerenciadorDeParticipacao {
 	@GeneratedValue
 	private Long id;
 	
-	public abstract void addParticipante(Evento evento, Usuario participante) throws InpossivelAddParticipante;
+	public abstract void addParticipante(Evento evento, Usuario participante) throws ImpossivelAddParticipante;
 
 }

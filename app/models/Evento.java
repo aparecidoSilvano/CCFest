@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import models.exceptions.EventoInvalidoException;
-import models.exceptions.InpossivelAddParticipante;
+import models.exceptions.ImpossivelAddParticipante;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Required;
 
@@ -143,8 +143,15 @@ public class Evento {
 		return participantes;
 	}
 	
-	public void addParticipante(Usuario participante) throws InpossivelAddParticipante {
-		gerenciadorDeParticipacao.addParticipante(this, participante);
+	public void addParticipante(Usuario participante) throws ImpossivelAddParticipante{
+		try {
+			gerenciadorDeParticipacao.addParticipante(this, participante);
+
+			// atualiza o contador do participante
+			participante.incrementaParticipacoes();
+		} catch (ImpossivelAddParticipante e) {
+			throw e;
+		}		
 	}
 
 	public GerenciadorDeParticipacao getGerenciadorDeParticipacao() {
@@ -154,6 +161,13 @@ public class Evento {
 	public void setGerenteParticipacao(
 			GerenciadorDeParticipacao gerenciadorDeParticipacao) {
 		this.gerenciadorDeParticipacao = gerenciadorDeParticipacao;
+	}
+	
+	public boolean haVagas(){
+		if(getTotalDeParticipantes() < local.getCapacidade()){
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

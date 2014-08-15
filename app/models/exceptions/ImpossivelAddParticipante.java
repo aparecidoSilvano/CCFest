@@ -1,10 +1,10 @@
 package models.exceptions;
 
-public class InpossivelAddParticipante extends Exception {
+public class ImpossivelAddParticipante extends Exception {
 
 	private static final long serialVersionUID = -4165837695281044656L;
 	
-	public InpossivelAddParticipante(String message){
+	public ImpossivelAddParticipante(String message){
 		super(message);
 	}
 }

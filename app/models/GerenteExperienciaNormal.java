@@ -9,7 +9,7 @@ public class GerenteExperienciaNormal extends GerenciadorExpereincia {
 		
 		// a experiência é dada por 2x + y, onde x é número de eventos administrados +
 		// número de eventos participados.
-		int numEventosAdiministrados = usuario.getNumEventosAdim();
+		int numEventosAdiministrados = usuario.getNumEvetosAdim();
 		int numParticipacoes = usuario.getNumParticipacoes();
 		return (2*numEventosAdiministrados) + numParticipacoes;
 	}

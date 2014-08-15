@@ -13,7 +13,8 @@ import models.Tema;
 import models.Usuario;
 import models.gerenteNormal;
 import models.exceptions.EventoInvalidoException;
-import models.exceptions.InpossivelAddParticipante;
+import models.exceptions.ImpossivelAddParticipante;
+import models.exceptions.PessoaInvalidaException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,8 +54,10 @@ public class EventoTest {
 		} catch (EventoInvalidoException e) {
 			System.out.println(e);
 			fail();
-		} catch (InpossivelAddParticipante e) {
+		} catch (ImpossivelAddParticipante e) {
 			System.out.println(e);
+			fail();
+		} catch (PessoaInvalidaException e) {
 			fail();
 		}
 	}
@@ -72,7 +75,9 @@ public class EventoTest {
 			assertEquals((int)e1.getTotalDeParticipantes(), 1);				
 		} catch (EventoInvalidoException e) {
 			fail();
-		} catch (InpossivelAddParticipante e) {
+		} catch (ImpossivelAddParticipante e) {
+			fail();
+		} catch (PessoaInvalidaException e) {
 			fail();
 		}
 	}

@@ -11,9 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.exceptions.PessoaInvalidaException;
+
 import org.hibernate.validator.constraints.Email;
 
 import play.data.validation.Constraints.MaxLength;
+import play.data.validation.Constraints.Required;
 
 @Entity(name = "Usuario")
 public class Usuario {
@@ -22,19 +25,23 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@OneToMany(targetEntity = Evento.class)
-	private List<Evento> eventosAdim = new ArrayList<Evento>();
+	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	@Email
 	@MaxLength(value = 70)
 	private String email;
 	
-	private String pass;
+	private String senha;
 	
 	@MaxLength(value = 70)
 	private String nome = "";
 	
+	@Required
 	private int numParticipacoes;
+	
+	@Required
+	private int numEvetosAdim;
 	
 	@OneToOne(targetEntity = GerenciadorExpereincia.class, cascade = CascadeType.ALL)
 	private GerenciadorExpereincia gerenExperiencia;
@@ -42,49 +49,64 @@ public class Usuario {
 	public Usuario() {
 	}
 	
-	public Usuario(String email, String pass, String nome) {
+	public Usuario(String email, String senha, String nome) throws PessoaInvalidaException {
 		setEmail(email);
 		setNome(nome);
-		setPass(pass);
+		setSenha(senha);
+	}
+
+	public Usuario(String email, String senha, String nome,
+			GerenciadorExpereincia gerenteExperiencia) throws PessoaInvalidaException {
+		setEmail(email);
+		setNome(nome);
+		setSenha(senha);
+		setGerenExperiencia(gerenteExperiencia);
 	}
 
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) throws PessoaInvalidaException {
+		if (email == null)
+			throw new PessoaInvalidaException("Parametro nulo");
+		if (!email.matches(EMAIL_PATTERN))
+			throw new PessoaInvalidaException("Email inválido");
+		if (email.length() > 70)
+			throw new PessoaInvalidaException("Email longo");
 		this.email = email;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getSenha() {
+		return senha;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [email=" + email + ", nome=" + nome + "]";
+		return "Usuario [email=" + email + ", nome=" + nome + ", experiência " + getExperiencia()+ "]";
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setSenha(String senha) throws PessoaInvalidaException {
+		if(senha == null){
+			throw new PessoaInvalidaException("Parametro nulo");
+		}if(senha.length() < 5){
+			throw new PessoaInvalidaException("Senha muito curta");
+		}		
+		this.senha = senha;
 	}
-
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(String nome) throws PessoaInvalidaException {
+		if (nome == null)
+			throw new PessoaInvalidaException("Parametro nulo");
+		if (nome.length() > 70)
+			throw new PessoaInvalidaException("Nome longo");
 		this.nome = nome;
 	}
 
-	public List<Evento> getEventosAdim() {
-		return eventosAdim;
-	}
-
-	public void setEventosAdim(List<Evento> eventosAdim) {
-		this.eventosAdim = eventosAdim;
-	}
-
+	
 	/**
 	 * @return the numParticipacoes
 	 */
@@ -116,9 +138,15 @@ public class Usuario {
 	public void setGerenExperiencia(GerenciadorExpereincia gerenExperiencia) {
 		this.gerenExperiencia = gerenExperiencia;
 	}
+
 	
-	public int getNumEventosAdim(){
-		return eventosAdim.size();
+	
+	public void incrementaEventosAdim() {
+		this.numEvetosAdim++;		
+	}
+	
+	public int getNumEvetosAdim() {
+		return numEvetosAdim;
 	}
 	
 }
