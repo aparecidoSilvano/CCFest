@@ -36,7 +36,7 @@ public class Login extends Controller {
 		String senha = u.getSenha();
 		String nome = u.getNome();
 		
-		System.out.println(nome + " - " + email + " - " + senha + " - " + loginForm.hasErrors());
+//		System.out.println(nome + " - " + email + " - " + senha + " - " + loginForm.hasErrors());
 
         if (loginForm.hasErrors() || !validate(email, senha)) {
         	flash("fail", "Email ou Senha Inválidos");

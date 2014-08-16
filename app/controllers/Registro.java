@@ -24,7 +24,6 @@ public class Registro extends Controller {
 	public static Result registrar() {
 		
 		Usuario u = registroForm.bindFromRequest().get();
-    	System.out.println("usuario a ser cadatrado " + u);
 		if (registroForm.hasErrors() || validate(u.getEmail())) {
 			flash("fail", "Email já está em uso");
             return badRequest(registro.render(registroForm));

@@ -110,7 +110,6 @@ public class EventoController extends Controller {
 	
 	@Transactional
 	public static Result participar(long id) throws PessoaInvalidaException, EventoInvalidoException{
-		System.out.println("entrou no metodo participar.");
 		// A ideia aqui é só pegar o usuario logado e adicionar esse user na lista do evento.
 		Usuario usuarioLogado = Application.getUsuarioLogado();
 		
