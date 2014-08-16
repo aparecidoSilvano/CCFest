@@ -57,6 +57,7 @@ public class Login extends Controller {
 		if (u == null || u.isEmpty()) {
 			return false;
 		}
+
 		if (!u.get(0).getSenha().equals(senha)) {
 			return false;
 		}

@@ -24,8 +24,8 @@ public class UsuarioTest extends AbstractTest{
 	@Test
 	public void DeveCriarUsuarios() {
 		try {
-			new Usuario("jose.silva@gmail.com", "12345", "jose");
-			new Usuario("maria.nobrega@gmail.com", "airam123", "maria");
+			new Usuario("jose.silva@gmail.com", "12345", "jose", new GerenteExperienciaNormal());
+			new Usuario("maria.nobrega@gmail.com", "airam123", "maria", new GerenteExperienciaNormal());
 		} catch (PessoaInvalidaException e) {
 			fail();
 		}		
@@ -35,7 +35,7 @@ public class UsuarioTest extends AbstractTest{
 	public void DeveDarExecao() {
 		// email nulo
 		try {
-			new Usuario(null, "12345", "teste1");
+			new Usuario(null, "12345", "teste1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Parametro nulo", e.getMessage());
@@ -43,7 +43,7 @@ public class UsuarioTest extends AbstractTest{
 		
 		// email inválido
 		try {
-			new Usuario("teste1gmail.com", "12345", "test1");
+			new Usuario("teste1gmail.com", "12345", "test1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Email inválido", e.getMessage());
@@ -51,7 +51,7 @@ public class UsuarioTest extends AbstractTest{
 
 		// email inválido
 		try {
-			new Usuario("teste1@gmail..com", "12345", "test1");
+			new Usuario("teste1@gmail..com", "12345", "test1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Email inválido", e.getMessage());
@@ -59,7 +59,7 @@ public class UsuarioTest extends AbstractTest{
 
 		// email inválido
 		try {
-			new Usuario("teste1@gmailcom", "12345", "test1");
+			new Usuario("teste1@gmailcom", "12345", "test1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Email inválido", e.getMessage());
@@ -67,7 +67,7 @@ public class UsuarioTest extends AbstractTest{
 
 		// senha nula
 		try {
-			new Usuario("teste1@gmail.com", null, "teste1");
+			new Usuario("teste1@gmail.com", null, "teste1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Parametro nulo", e.getMessage());
@@ -75,7 +75,7 @@ public class UsuarioTest extends AbstractTest{
 		
 		// senha inválida
 		try {
-			new Usuario("teste1@gmail.com", "", "teste1");
+			new Usuario("teste1@gmail.com", "", "teste1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Senha muito curta", e.getMessage());
@@ -83,7 +83,7 @@ public class UsuarioTest extends AbstractTest{
 
 		// senha inválida
 		try {
-			new Usuario("teste1@gmail.com", "123", "teste1");
+			new Usuario("teste1@gmail.com", "123", "teste1", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Senha muito curta", e.getMessage());
@@ -91,7 +91,7 @@ public class UsuarioTest extends AbstractTest{
 		
 		// nome nulo
 		try {
-			new Usuario("teste1@gmail.com", "12345", null);
+			new Usuario("teste1@gmail.com", "12345", null, new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Parametro nulo", e.getMessage());
@@ -99,7 +99,7 @@ public class UsuarioTest extends AbstractTest{
 		
 		// nome nulo
 		try {
-			new Usuario("teste1@gmail.com", "12345", "David Paulo da Silva Alcântara Barbosa Melo Nobrega Bragança Albuquerque");
+			new Usuario("teste1@gmail.com", "12345", "David Paulo da Silva Alcântara Barbosa Melo Nobrega Bragança Albuquerque", new GerenteExperienciaNormal());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			assertEquals("Nome longo", e.getMessage());
@@ -114,8 +114,8 @@ public class UsuarioTest extends AbstractTest{
 			List<Usuario> usuarios = dao.findAllByClassName("Usuario");
 			assertThat(usuarios.size()).isEqualTo(0);
 			
-			Usuario u1 = new Usuario("jose.silva@gmail.com", "12345", "jose");
-			Usuario u2 = new Usuario("maria.nobrega@gmail.com", "airam123", "maria");
+			Usuario u1 = new Usuario("jose.silva@gmail.com", "12345", "jose", new GerenteExperienciaNormal());
+			Usuario u2 = new Usuario("maria.nobrega@gmail.com", "airam123", "maria", new GerenteExperienciaNormal());
 			dao.persist(u1);			
 			dao.persist(u2);			
 			
@@ -138,7 +138,7 @@ public class UsuarioTest extends AbstractTest{
 	@Test
 	public void DeveCalcularExperiencia() {
 		try {
-			Usuario usuario = new Usuario("jose.silva@gmail.com", "12345", "jose");
+			Usuario usuario = new Usuario("jose.silva@gmail.com", "12345", "jose", new GerenteExperienciaNormal());
 			usuario.setGerenExperiencia(new GerenteExperienciaNormal());
 			assertThat(usuario.getExperiencia()).isEqualTo(0);
 			

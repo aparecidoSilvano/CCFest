@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 
+import models.GerenteExperienciaNormal;
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -45,13 +46,13 @@ public class Application extends Controller {
 	// só pra testar vou inserir uns users no bd.
 	private static void povoaBD() {
 		try {
-			Usuario u1 = new Usuario("jose.silva@gmail.com", "12345", "josé");
-			Usuario u2 = new Usuario("maria.silva@gmail.com", "12345", "maria");
-			Usuario u3 = new Usuario("silvana123@gmail.com", "12345", "silvana");
-			Usuario u4 = new Usuario("joao.jose@gmail.com", "12345", "joao");
-			Usuario u5 = new Usuario("jonas.silva@gmail.com", "12345", "jonas");
+			Usuario u1 = new Usuario("jose.silva@gmail.com", "12345", "josé", new GerenteExperienciaNormal());
+			Usuario u2 = new Usuario("maria.silva@gmail.com", "12345", "maria", new GerenteExperienciaNormal());
+			Usuario u3 = new Usuario("silvana123@gmail.com", "12345", "silvana", new GerenteExperienciaNormal());
+			Usuario u4 = new Usuario("joao.jose@gmail.com", "12345", "joao", new GerenteExperienciaNormal());
+			Usuario u5 = new Usuario("jonas.silva@gmail.com", "12345", "jonas", new GerenteExperienciaNormal());
 			Usuario u6 = new Usuario("mariquinha@gmail.com", "12345",
-					"mariquinha");
+					"mariquinha", new GerenteExperienciaNormal());
 
 			dao.persist(u1);
 			dao.persist(u2);

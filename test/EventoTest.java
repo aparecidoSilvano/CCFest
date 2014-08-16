@@ -161,7 +161,7 @@ public class EventoTest {
 	public void deveAddParticipante(){
 		try {
 						
-			Usuario usuario = new Usuario("jose.silva@gmail.com", "12345", "jose");
+			Usuario usuario = new Usuario("jose.silva@gmail.com", "12345", "jose", new GerenteExperienciaNormal());
 			Local l = new Local("aúditorio central", 100, "na ufcg");
 			
 			// e1 é um evento que gerência a adição de usuarios normalmente, de maneira sequêncial.

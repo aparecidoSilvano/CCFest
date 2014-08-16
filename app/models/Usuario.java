@@ -38,10 +38,10 @@ public class Usuario {
 	private String nome = "";
 	
 	@Required
-	private int numParticipacoes;
+	private int numParticipacoes = 0;
 	
 	@Required
-	private int numEvetosAdim;
+	private int numEvetosAdim = 0;
 	
 	@OneToOne(targetEntity = GerenciadorExpereincia.class, cascade = CascadeType.ALL)
 	private GerenciadorExpereincia gerenExperiencia;
@@ -49,12 +49,6 @@ public class Usuario {
 	public Usuario() {
 	}
 	
-	public Usuario(String email, String senha, String nome) throws PessoaInvalidaException {
-		setEmail(email);
-		setNome(nome);
-		setSenha(senha);
-	}
-
 	public Usuario(String email, String senha, String nome,
 			GerenciadorExpereincia gerenteExperiencia) throws PessoaInvalidaException {
 		setEmail(email);
@@ -122,7 +116,10 @@ public class Usuario {
 	}
 	
 	public int getExperiencia(){
-		return gerenExperiencia.calculaExperiencia(this);
+		if(gerenExperiencia != null){
+			return gerenExperiencia.calculaExperiencia(this);
+		}
+		return 0;
 	}
 
 	/**
