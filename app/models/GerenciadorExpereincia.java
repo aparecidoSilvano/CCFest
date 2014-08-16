@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public abstract class GerenciadorExpereincia {
 	@Id
 	@GeneratedValue
-	private Long id;
+	Long id;
 	
 	public abstract int calculaExperiencia(Usuario usuario);
 }

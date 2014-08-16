@@ -1,14 +1,10 @@
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import models.exceptions.PessoaInvalidaException;
@@ -23,9 +19,9 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long id;
+	Long id;
 	
-	private final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	private final String EMAILPATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	@Email
@@ -64,7 +60,7 @@ public class Usuario {
 	public void setEmail(String email) throws PessoaInvalidaException {
 		if (email == null)
 			throw new PessoaInvalidaException("Parametro nulo");
-		if (!email.matches(EMAIL_PATTERN))
+		if (!email.matches(EMAILPATTERN))
 			throw new PessoaInvalidaException("Email inválido");
 		if (email.length() > 70)
 			throw new PessoaInvalidaException("Email longo");

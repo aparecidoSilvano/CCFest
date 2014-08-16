@@ -1,13 +1,11 @@
 package models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 import models.exceptions.ImpossivelAddParticipante;
 
 @Entity(name="gerenteNormal")
-public class gerenteNormal extends GerenciadorDeParticipacao {
+public class GerenteNormal extends GerenciadorDeParticipacao {
 	
 	@Override
 	public void addParticipante(Evento evento, Usuario participante) throws ImpossivelAddParticipante {

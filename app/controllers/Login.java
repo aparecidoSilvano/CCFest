@@ -17,14 +17,9 @@ import views.html.*;
 public class Login extends Controller {
 	
 	private static GenericDAO dao = new GenericDAOImpl();
-	static Form<Usuario> loginForm = form(Usuario.class).bindFromRequest();
+	private static Form<Usuario> loginForm = form(Usuario.class).bindFromRequest();
 	
 	public static Result showLogin() {
-		
-/*		System.out.println(session().get("user"));
-		if (session().get("user") != null) {
-			return redirect(routes.Application.index());
-		}*/
         return ok(login.render(loginForm));
 	}
 	
@@ -34,7 +29,6 @@ public class Login extends Controller {
 		
 		String email = u.getEmail();
 		String senha = u.getSenha();
-		String nome = u.getNome();
 		
 //		System.out.println(nome + " - " + email + " - " + senha + " - " + loginForm.hasErrors());
 

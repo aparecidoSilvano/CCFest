@@ -11,7 +11,7 @@ import models.exceptions.LocalException;
 public class Local {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private long id;
+	long id;
 
 	
 	private String nomeLocal;

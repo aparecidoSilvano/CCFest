@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="models.gerenteNormal" project="CCFest" 
-    file="/CCFest/app/models/gerenteNormal.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="models.GerenteNormal" project="CCFest" 
+    file="/CCFest/app/models/GerenteNormal.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="584" y="572"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

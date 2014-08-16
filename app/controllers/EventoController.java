@@ -17,7 +17,7 @@ import models.GerentePrioridadeExperiencia;
 import models.Local;
 import models.Tema;
 import models.Usuario;
-import models.gerenteNormal;
+import models.GerenteNormal;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.ImpossivelAddParticipante;
 import models.exceptions.LocalException;
@@ -89,7 +89,7 @@ public class EventoController extends Controller {
 		if(prioritario){
 			gerente = new GerentePrioridadeExperiencia();
 		}else{
-			gerente = new gerenteNormal();
+			gerente = new GerenteNormal();
 		}
 		
 		Evento novoEvento = new Evento(titulo, descricao, data, local, temas, gerente);		

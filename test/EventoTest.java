@@ -11,7 +11,7 @@ import models.GerentePrioridadeExperiencia;
 import models.Local;
 import models.Tema;
 import models.Usuario;
-import models.gerenteNormal;
+import models.GerenteNormal;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.ImpossivelAddParticipante;
 import models.exceptions.LocalException;
@@ -38,10 +38,10 @@ public class EventoTest {
 			Local l = new Local("teatro qualquer", 1000, "perto do centro");
 			
 			new Evento("teste 1", "primeiro evento ficticio criado", 
-					new Date(), l, temas, new gerenteNormal());
+					new Date(), l, temas, new GerenteNormal());
 			
 			new Evento("teste 1", "primeiro evento ficticio criado", 
-					new Date(), l, temas, new gerenteNormal());	
+					new Date(), l, temas, new GerenteNormal());	
 			
 		} catch (EventoInvalidoException e) {
 			fail();
@@ -75,7 +75,7 @@ public class EventoTest {
 		
 		// Local nulo.	
 		try {
-			new Evento("Python na cabeça", "Vamos programar em Python!", new Date(), null, temas, new gerenteNormal());
+			new Evento("Python na cabeça", "Vamos programar em Python!", new Date(), null, temas, new GerenteNormal());
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}	
@@ -91,14 +91,14 @@ public class EventoTest {
 		
 		try {
 			new Evento(null,
-					"Vamos programar em Python!", new Date(), l, temas, new gerenteNormal());
+					"Vamos programar em Python!", new Date(), l, temas, new GerenteNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}
 		try {
 			new Evento("Python na cabeça",
-					null, new Date(), l, temas, new gerenteNormal());
+					null, new Date(), l, temas, new GerenteNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
@@ -132,14 +132,14 @@ public class EventoTest {
 			}
 			
 			new Evento("Python na cabeça",
-					descricaoLonga, new Date(), l, temas, new gerenteNormal());
+					descricaoLonga, new Date(), l, temas, new GerenteNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Descrição longa", e.getMessage());
 		}
 		try {
 			new Evento("Python na cabeça na mente e no coração uhuuu",
-					"Vamos programar em Python!", new Date(), l, temas, new gerenteNormal());
+					"Vamos programar em Python!", new Date(), l, temas, new GerenteNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Título longo", e.getMessage());
@@ -149,7 +149,7 @@ public class EventoTest {
 			calendar.add(Calendar.DAY_OF_WEEK, -1);
 
 			new Evento("Python na cabeça",
-					"Vamos programar em Python!", calendar.getTime(), l, temas, new gerenteNormal());
+					"Vamos programar em Python!", calendar.getTime(), l, temas, new GerenteNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Data inválida", e.getMessage());
@@ -165,7 +165,7 @@ public class EventoTest {
 			Local l = new Local("aúditorio central", 100, "na ufcg");
 			
 			// e1 é um evento que gerência a adição de usuarios normalmente, de maneira sequêncial.
-			Evento e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new gerenteNormal());
+			Evento e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new GerenteNormal());
 			e1.addParticipante(usuario);
 			assertEquals((int)e1.getTotalDeParticipantes(), 1);				
 
@@ -240,7 +240,7 @@ public class EventoTest {
 			
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 			
-			e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new gerenteNormal());
+			e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new GerenteNormal());
 
 			e1.addParticipante(u1);		e1.addParticipante(u2);			e1.addParticipante(u3);
 			e1.addParticipante(u4);		e1.addParticipante(u5);

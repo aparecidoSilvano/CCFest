@@ -11,7 +11,7 @@ public abstract class GerenciadorDeParticipacao {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	Long id;
 	
 	public abstract void addParticipante(Evento evento, Usuario participante) throws ImpossivelAddParticipante;
 
