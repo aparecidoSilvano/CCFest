@@ -230,23 +230,81 @@ public class EventoTest {
 
 	@Test
 	public void naoDeveAddParticipante(){
+		Evento e1 = new Evento();
 		try {
-						
-			Usuario usuario = new Usuario("jose.silva@gmail.com", "12345", "jose");
-			Local l = new Local("aúditorio central", 100, "na ufcg");
-			Evento e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new gerenteNormal());
+			Usuario u1 = new Usuario("jose@gmail.com", "12344", "jose", new GerenteExperienciaNormal());
+			Usuario u2 = new Usuario("maria.maria@gmail.com", "97878", "maria", new GerenteExperienciaNormal());
+			Usuario u3 = new Usuario("lucas@gmail.com", "12345", "lucas", new GerenteExperienciaNormal());
+			Usuario u4 = new Usuario("lucia@gmail.com", "jkui232H", "lucia", new GerenteExperienciaNormal());
+			Usuario u5 = new Usuario("joice.silva@gmail.com", "12345", "joice", new GerenteExperienciaNormal());			
+			
+			Local l = new Local("aúditorio central", 4, "na ufcg");
+			
+			e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new gerenteNormal());
 
-			e1.addParticipante(usuario);
+			e1.addParticipante(u1);		e1.addParticipante(u2);			e1.addParticipante(u3);
+			e1.addParticipante(u4);		e1.addParticipante(u5);
 			
 			assertEquals((int)e1.getTotalDeParticipantes(), 1);				
 		} catch (EventoInvalidoException e) {
 			fail();
 		} catch (ImpossivelAddParticipante e) {
-			fail();
+			// confere se realemnte não foi inserido o usuario
+			assertEquals(e1.getParticipantes().size(), 4);
 		} catch (PessoaInvalidaException e) {
 			fail();
 		} catch (LocalException e) {
 			fail();
 		}
-	}	
+	}
+	
+	@Test
+	public void naoDeveAddParticipantePoucaExperiencia(){
+		try {
+			Usuario u1 = new Usuario("jose@gmail.com", "12344", "jose", new GerenteExperienciaNormal());
+			Usuario u2 = new Usuario("maria.maria@gmail.com", "97878", "maria", new GerenteExperienciaNormal());
+			Usuario u3 = new Usuario("lucas@gmail.com", "12345", "lucas", new GerenteExperienciaNormal());
+			Usuario u4 = new Usuario("lucia@gmail.com", "jkui232H", "lucia", new GerenteExperienciaNormal());
+			Usuario u5 = new Usuario("joice.silva@gmail.com", "12345", "joice", new GerenteExperienciaNormal());
+			
+			Local l = new Local("aúditorio central", 4, "na ufcg");
+			
+			Evento e1 = new Evento("evento teste1", "evento para testes",
+					new Date(), l, temas, new GerentePrioridadeExperiencia());
+			
+			u1.incrementaEventosAdim(); 	u1.incrementaParticipacoes();
+			assertEquals(3, u1.getExperiencia());
+			
+			u2.incrementaEventosAdim();
+			assertEquals(2, u2.getExperiencia());
+			
+			u3.incrementaParticipacoes();
+			assertEquals(1, u3.getExperiencia());
+			
+			/*
+			 * Repare que u4 e u5 possuem a mesma experiência,
+			 * logo u5 não deve participar do evento.
+			 */
+			assertEquals(0, u4.getExperiencia());
+			assertEquals(0, u5.getExperiencia());
+			
+			e1.addParticipante(u1);		e1.addParticipante(u2);		e1.addParticipante(u3);
+			e1.addParticipante(u4);		e1.addParticipante(u5);
+			
+			assertEquals((int) e1.getTotalDeParticipantes(), 4);
+			
+			// ele não inseriu o u5
+			assertTrue(e1.getParticipantes().contains(u4));
+			assertFalse(e1.getParticipantes().contains(u5));
+		
+		} catch (EventoInvalidoException e) {
+			fail();
+		} catch (ImpossivelAddParticipante e) {
+			assertTrue(true);
+		} catch (PessoaInvalidaException e) {
+			fail();
+		} catch (LocalException e) {
+			fail();
+		}
+	}
 }
