@@ -2,7 +2,7 @@ package models;
 
 import java.util.Comparator;
 
-public class ExperienciaComparator implements Comparator<Usuario> {
+public class UsuarioComparator implements Comparator<Usuario> {
 
 	@Override
 	public int compare(Usuario user1, Usuario user2) {

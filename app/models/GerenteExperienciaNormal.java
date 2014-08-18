@@ -1,6 +1,6 @@
 package models;
 
-public class GerenteExperienciaNormal extends GerenciadorExpereincia {
+public class GerenteExperienciaNormal extends GerenciadorExperienciaUsuario {
 
 	@Override
 	public int calculaExperiencia(Usuario usuario) {

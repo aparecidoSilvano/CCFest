@@ -30,15 +30,15 @@
   </class>  
   <class id="4" language="java" name="models.GerenciadorDeParticipacao" project="CCFest" 
     file="/CCFest/app/models/GerenciadorDeParticipacao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="814" y="409"/>    
+    <position height="-1" width="-1" x="829" y="479"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="models.GerenteNormal" project="CCFest" 
-    file="/CCFest/app/models/GerenteNormal.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="models.GerenteParticipacaoNormal" project="CCFest" 
+    file="/CCFest/app/models/GerenteParticipacaoNormal.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="584" y="572"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -46,17 +46,17 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="models.GerentePrioridadeExperiencia" project="CCFest" 
-    file="/CCFest/app/models/GerentePrioridadeExperiencia.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="987" y="573"/>    
+  <class id="6" language="java" name="models.GerenteParticipacaoPrioritario" project="CCFest" 
+    file="/CCFest/app/models/GerenteParticipacaoPrioritario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1079" y="575"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="models.GerenciadorExpereincia" project="CCFest" 
-    file="/CCFest/app/models/GerenciadorExpereincia.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="models.GerenciadorExperienciaUsuario" project="CCFest" 
+    file="/CCFest/app/models/GerenciadorExperienciaUsuario.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="91" y="27"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -94,50 +94,51 @@
   </association>  
   <association id="13">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="14" name="temas">        
-        <position height="18" width="37" x="1015" y="210"/>      
-      </attribute>      
-      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="16">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <generalization id="17">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="4"/>  
-  </generalization>  
-  <generalization id="18">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="7"/>  
-  </generalization>  
-  <association id="19">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="20" name="participantes">        
+      <attribute id="14" name="participantes">        
         <position height="18" width="70" x="563" y="20"/>      
       </attribute>      
-      <multiplicity id="21" minimum="0" maximum="2147483647"/>    
+      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
+  <association id="16">    
+    <bendpoint x="824" y="352"/>    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="23" name="local"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+      <attribute id="17" name="gerenciadorDeParticipacao"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="20" name="local"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <generalization id="24">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
   <association id="25">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="26" name="gerenciadorDeParticipacao"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
+      <attribute id="26" name="temas">        
+        <position height="18" width="37" x="1015" y="210"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

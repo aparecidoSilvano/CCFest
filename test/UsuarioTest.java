@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import models.ExperienciaComparator;
+import models.UsuarioComparator;
 import models.GerenteExperienciaNormal;
 import models.Usuario;
 import models.dao.GenericDAO;
@@ -183,7 +183,7 @@ public class UsuarioTest extends AbstractTest{
 			participantes.add(u1);		participantes.add(u2);		participantes.add(u3);
 			participantes.add(u4);		participantes.add(u5);		participantes.add(u6);
 			
-			Collections.sort(participantes, new ExperienciaComparator());
+			Collections.sort(participantes, new UsuarioComparator());
 			
 			assertEquals(u3, participantes.get(0));
 			assertEquals(u6, participantes.get(1));

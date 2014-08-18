@@ -45,14 +45,14 @@ public class Usuario {
 	@Required
 	private int numEvetosAdim = 0;
 	
-	@OneToOne(targetEntity = GerenciadorExpereincia.class, cascade = CascadeType.ALL)
-	private GerenciadorExpereincia gerenExperiencia;
+	@OneToOne(targetEntity = GerenciadorExperienciaUsuario.class, cascade = CascadeType.ALL)
+	private GerenciadorExperienciaUsuario gerenExperiencia;
 	
 	public Usuario() {
 	}
 	
 	public Usuario(String email, String senha, String nome,
-			GerenciadorExpereincia gerenteExperiencia) throws PessoaInvalidaException {
+			GerenciadorExperienciaUsuario gerenteExperiencia) throws PessoaInvalidaException {
 		setEmail(email);
 		setNome(nome);
 		setSenha(senha);
@@ -132,14 +132,14 @@ public class Usuario {
 	/**
 	 * @return the gerenExperiencia
 	 */
-	public GerenciadorExpereincia getGerenExperiencia() {
+	public GerenciadorExperienciaUsuario getGerenExperiencia() {
 		return gerenExperiencia;
 	}
 	
 	/**
 	 * @param gerenExperiencia the gerenExperiencia to set
 	 */
-	public void setGerenExperiencia(GerenciadorExpereincia gerenExperiencia) {
+	public void setGerenExperiencia(GerenciadorExperienciaUsuario gerenExperiencia) {
 		this.gerenExperiencia = gerenExperiencia;
 	}
 

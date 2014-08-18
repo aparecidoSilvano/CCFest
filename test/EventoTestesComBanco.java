@@ -13,7 +13,7 @@ import org.junit.Test;
 import base.AbstractTest;
 
 
-public class EventTest extends AbstractTest {
+public class EventoTestesComBanco extends AbstractTest {
 	private static GenericDAO dao = new GenericDAOImpl();
 	private List<Tema> temas;
 	
@@ -47,7 +47,7 @@ public class EventTest extends AbstractTest {
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 
 			Evento e1 = new Evento("evento teste1", "evento para testes",
-					new Date(), l, temas, new GerenteNormal());
+					new Date(), l, temas, new GerenteParticipacaoNormal());
 			
 			dao.persist(e1);
 			eventos = dao.findAllByClassName("Evento");
@@ -98,9 +98,9 @@ public class EventTest extends AbstractTest {
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 			
 			Evento e1 = new Evento("evento teste1", "evento para testes",
-					new Date(), l, temas, new GerentePrioridadeExperiencia());
+					new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			Evento e2 = new Evento("evento teste2", "evento para testes",
-					new Date(), l, temas, new GerentePrioridadeExperiencia());
+					new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			
 			Usuario u1 = new Usuario("jose@gmail.com", "12344", "jose", new GerenteExperienciaNormal());
 			Usuario u2 = new Usuario("maria.maria@gmail.com", "97878", "maria", new GerenteExperienciaNormal());

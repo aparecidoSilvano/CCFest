@@ -76,7 +76,7 @@ public class Evento {
 		setLocal(local);
 		setTemas(temas);
 		setGerenteParticipacao(gerente);
-		if(gerente instanceof GerentePrioridadeExperiencia){
+		if(gerente instanceof GerenteParticipacaoPrioritario){
 			reservadoExperientes = true;
 		}
 	}

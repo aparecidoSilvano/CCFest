@@ -7,11 +7,11 @@ import java.util.List;
 
 import models.Evento;
 import models.GerenteExperienciaNormal;
-import models.GerentePrioridadeExperiencia;
+import models.GerenteParticipacaoPrioritario;
 import models.Local;
 import models.Tema;
 import models.Usuario;
-import models.GerenteNormal;
+import models.GerenteParticipacaoNormal;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.ImpossivelAddParticipante;
 import models.exceptions.LocalException;
@@ -36,10 +36,10 @@ public class EventoTest{
 			Local l = new Local("teatro qualquer", 1000, "perto do centro");
 			
 			new Evento("teste 1", "primeiro evento ficticio criado", 
-					new Date(), l, temas, new GerenteNormal());
+					new Date(), l, temas, new GerenteParticipacaoNormal());
 			
 			new Evento("teste 1", "primeiro evento ficticio criado", 
-					new Date(), l, temas, new GerenteNormal());	
+					new Date(), l, temas, new GerenteParticipacaoNormal());	
 			
 		} catch (EventoInvalidoException e) {
 			fail();
@@ -73,7 +73,7 @@ public class EventoTest{
 		
 		// Local nulo.	
 		try {
-			new Evento("Python na cabeça", "Vamos programar em Python!", new Date(), null, temas, new GerenteNormal());
+			new Evento("Python na cabeça", "Vamos programar em Python!", new Date(), null, temas, new GerenteParticipacaoNormal());
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}	
@@ -89,21 +89,21 @@ public class EventoTest{
 		
 		try {
 			new Evento(null,
-					"Vamos programar em Python!", new Date(), l, temas, new GerenteNormal());
+					"Vamos programar em Python!", new Date(), l, temas, new GerenteParticipacaoNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}
 		try {
 			new Evento("Python na cabeça",
-					null, new Date(), l, temas, new GerenteNormal());
+					null, new Date(), l, temas, new GerenteParticipacaoNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
 		}
 		try {
 			new Evento("Python na cabeça",
-					"Vamos programar em Python!", null, l, temas, new GerentePrioridadeExperiencia());
+					"Vamos programar em Python!", null, l, temas, new GerenteParticipacaoPrioritario());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Parametro nulo", e.getMessage());
@@ -117,7 +117,7 @@ public class EventoTest{
 		}
 		try {
 			new Evento("Python na cabeça",
-					"Vamos programar em Python!", new Date(), l, new ArrayList<Tema>(), new GerentePrioridadeExperiencia());
+					"Vamos programar em Python!", new Date(), l, new ArrayList<Tema>(), new GerenteParticipacaoPrioritario());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Nenhum tema", e.getMessage());
@@ -130,14 +130,14 @@ public class EventoTest{
 			}
 			
 			new Evento("Python na cabeça",
-					descricaoLonga, new Date(), l, temas, new GerenteNormal());
+					descricaoLonga, new Date(), l, temas, new GerenteParticipacaoNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Descrição longa", e.getMessage());
 		}
 		try {
 			new Evento("Python na cabeça na mente e no coração uhuuu",
-					"Vamos programar em Python!", new Date(), l, temas, new GerenteNormal());
+					"Vamos programar em Python!", new Date(), l, temas, new GerenteParticipacaoNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Título longo", e.getMessage());
@@ -147,7 +147,7 @@ public class EventoTest{
 			calendar.add(Calendar.DAY_OF_WEEK, -1);
 
 			new Evento("Python na cabeça",
-					"Vamos programar em Python!", calendar.getTime(), l, temas, new GerenteNormal());
+					"Vamos programar em Python!", calendar.getTime(), l, temas, new GerenteParticipacaoNormal());
 			fail();
 		} catch (EventoInvalidoException e) {
 			assertEquals("Data inválida", e.getMessage());
@@ -163,12 +163,12 @@ public class EventoTest{
 			Local l = new Local("aúditorio central", 100, "na ufcg");
 			
 			// e1 é um evento que gerência a adição de usuarios normalmente, de maneira sequêncial.
-			Evento e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new GerenteNormal());
+			Evento e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new GerenteParticipacaoNormal());
 			e1.addParticipante(usuario);
 			assertEquals((int)e1.getTotalDeParticipantes(), 1);				
 
 			// e2 é um evento que gerência a adição de usuarios de acordo com a experiência do usuario.
-			Evento e2 = new Evento("evento teste2", "evento para testes", new Date(), l, temas, new GerentePrioridadeExperiencia());
+			Evento e2 = new Evento("evento teste2", "evento para testes", new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			e2.addParticipante(usuario);
 			assertEquals((int)e2.getTotalDeParticipantes(), 1);
 			
@@ -195,7 +195,7 @@ public class EventoTest{
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 			
 			Evento e1 = new Evento("evento teste1", "evento para testes",
-					new Date(), l, temas, new GerentePrioridadeExperiencia());
+					new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			
 			// supondo que ele tenha adiministrado um evento.
 			u5.incrementaEventosAdim();
@@ -237,7 +237,7 @@ public class EventoTest{
 			
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 			
-			e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new GerenteNormal());
+			e1 = new Evento("evento teste1", "evento para testes", new Date(), l, temas, new GerenteParticipacaoNormal());
 
 			e1.addParticipante(u1);		e1.addParticipante(u2);			e1.addParticipante(u3);
 			e1.addParticipante(u4);		e1.addParticipante(u5);
@@ -267,7 +267,7 @@ public class EventoTest{
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 			
 			Evento e1 = new Evento("evento teste1", "evento para testes",
-					new Date(), l, temas, new GerentePrioridadeExperiencia());
+					new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			
 			u1.incrementaEventosAdim(); 	u1.incrementaParticipacoes();
 			assertEquals(3, u1.getExperiencia());
@@ -308,9 +308,9 @@ public class EventoTest{
 			Local l = new Local("aúditorio central", 4, "na ufcg");
 			
 			Evento e1 = new Evento("evento teste1", "evento para testes",
-					new Date(), l, temas, new GerentePrioridadeExperiencia());
+					new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			Evento e2 = new Evento("evento teste2", "evento para testes",
-					new Date(), l, temas, new GerentePrioridadeExperiencia());
+					new Date(), l, temas, new GerenteParticipacaoPrioritario());
 			
 			Usuario u1 = new Usuario("jose@gmail.com", "12344", "jose", new GerenteExperienciaNormal());
 			

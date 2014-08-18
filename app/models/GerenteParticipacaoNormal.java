@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import models.exceptions.ImpossivelAddParticipante;
 
 @Entity(name="gerenteNormal")
-public class GerenteNormal extends GerenciadorDeParticipacao {
+public class GerenteParticipacaoNormal extends GerenciadorDeParticipacao {
 	
 	@Override
 	public void addParticipante(Evento evento, Usuario participante) throws ImpossivelAddParticipante {

@@ -13,11 +13,11 @@ import java.util.List;
 import models.Evento;
 import models.EventoComparator;
 import models.GerenciadorDeParticipacao;
-import models.GerentePrioridadeExperiencia;
+import models.GerenteParticipacaoPrioritario;
 import models.Local;
 import models.Tema;
 import models.Usuario;
-import models.GerenteNormal;
+import models.GerenteParticipacaoNormal;
 import models.exceptions.EventoInvalidoException;
 import models.exceptions.ImpossivelAddParticipante;
 import models.exceptions.LocalException;
@@ -91,9 +91,9 @@ public class EventoController extends Controller {
 		
 		GerenciadorDeParticipacao gerente;
 		if(prioritario){
-			gerente = new GerentePrioridadeExperiencia();
+			gerente = new GerenteParticipacaoPrioritario();
 		}else{
-			gerente = new GerenteNormal();
+			gerente = new GerenteParticipacaoNormal();
 		}
 		
 		Evento novoEvento = new Evento(titulo, descricao, data, local, temas, gerente);		

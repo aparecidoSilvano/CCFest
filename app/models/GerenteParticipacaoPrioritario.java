@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import models.exceptions.ImpossivelAddParticipante;
 
 @Entity(name = "GerentePrioridadeExperiencia")
-public class GerentePrioridadeExperiencia extends GerenciadorDeParticipacao {
+public class GerenteParticipacaoPrioritario extends GerenciadorDeParticipacao {
 
 	@Override
 	public void addParticipante(Evento evento, Usuario participante)
@@ -16,7 +16,7 @@ public class GerentePrioridadeExperiencia extends GerenciadorDeParticipacao {
 			evento.getParticipantes().add(participante);
 		} else {
 			Collections.sort(evento.getParticipantes(),
-					new ExperienciaComparator());
+					new UsuarioComparator());
 			int numParticipantes = evento.getTotalDeParticipantes();
 			if (evento.getParticipantes().get(numParticipantes -1)
 					.getExperiencia() < participante.getExperiencia()) {
@@ -25,7 +25,7 @@ public class GerentePrioridadeExperiencia extends GerenciadorDeParticipacao {
 
 				// reeordena a lista.
 				Collections.sort(evento.getParticipantes(),
-						new ExperienciaComparator());
+						new UsuarioComparator());
 			} else {
 				throw new ImpossivelAddParticipante("O usuário não possui experiência suficiente para participar desse evento");
 			}

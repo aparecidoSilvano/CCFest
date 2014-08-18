@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name="GerenciadorExpereincia")
-public abstract class GerenciadorExpereincia {
+public abstract class GerenciadorExperienciaUsuario {
 	@Id
 	@GeneratedValue
 	Long id;
