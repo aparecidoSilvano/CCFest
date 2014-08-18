@@ -49,7 +49,13 @@ $(document).on('ready', function(event) {
 							modal.find('.modal-local-evento').val(infoEvento.local.nomeLocal);
 							modal.find('.modal-local-capacidade').val(infoEvento.local.capacidade);
 							modal.find('.modal-local-como-chegar').val(infoEvento.local.comoChegar);	
-//							modal.find('.modal-prioritario').val(infoEvento.); ???
+//							modal.find('.modal-prioritario').val(infoEvento.reservadoExperientes);
+														
+							if(infoEvento.reservadoExperientes){
+								modal.find('.modal-prioritario').prop('checked', true);
+							}else{
+								modal.find('.modal-prioritario').prop('unchecked', false);
+							}
 							modal.modal('show');
 						});
 						

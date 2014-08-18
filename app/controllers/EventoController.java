@@ -26,6 +26,7 @@ import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
+import scala.Enumeration.Val;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -73,8 +74,12 @@ public class EventoController extends Controller {
 		String nomeLocal = eventoFormRequest.field("nomeLocal").value();
 		String comoChegar = eventoFormRequest.field("comoChegar").value();
 		int capacidade = Integer.valueOf(eventoFormRequest.field("capacidade").value());
-		boolean prioritario = eventoFormRequest.field("prioritario").equals("true");
 		
+		boolean prioritario = false;
+		if(eventoFormRequest.field("prioritario").value() != null && eventoFormRequest.field("prioritario").value().equals("on")){
+			prioritario = true;
+		}		
+	
 		Local local = new Local(nomeLocal, capacidade, comoChegar);
 		
 		List<Tema> temas = new ArrayList<Tema>();
@@ -84,7 +89,6 @@ public class EventoController extends Controller {
 			}
 		}
 		
-		System.out.println("é prioritario " + prioritario);
 		GerenciadorDeParticipacao gerente;
 		if(prioritario){
 			gerente = new GerentePrioridadeExperiencia();

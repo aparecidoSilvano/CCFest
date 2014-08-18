@@ -13,7 +13,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +54,8 @@ public class Evento {
 	@NotNull
 	private List<Tema> temas = new ArrayList<Tema>();
 	
+	@Required
+	private boolean reservadoExperientes = false;
 	
 	@OneToOne(targetEntity = Local.class, cascade = CascadeType.ALL)
 	private Local local;
@@ -75,7 +76,20 @@ public class Evento {
 		setLocal(local);
 		setTemas(temas);
 		setGerenteParticipacao(gerente);
+		if(gerente instanceof GerentePrioridadeExperiencia){
+			reservadoExperientes = true;
+		}
 	}
+
+	public boolean isReservadoExperientes() {
+		return reservadoExperientes;
+	}
+
+
+	public void setReservadoExperientes(boolean reservadoExperientes) {
+		this.reservadoExperientes = reservadoExperientes;
+	}
+
 
 	public String getTitulo() {
 		return titulo;
