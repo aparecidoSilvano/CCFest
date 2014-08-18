@@ -25,8 +25,8 @@ import play.data.validation.Constraints.Required;
 
 @Entity(name = "Evento")
 public class Evento {
-	private final int max_LENGHT_TITULO = 40;
-	private final int max_LENGHT_DESCRICAO = 450;
+	private static final int MAX_LENGHT_TITULO = 40;
+	private static final int MAX_LENGHT_DESCRICAO = 450;
 	
 
 	@Id
@@ -34,12 +34,12 @@ public class Evento {
 	private long id;
 
 	@Required
-	@MaxLength(value = max_LENGHT_TITULO)
+	@MaxLength(value = MAX_LENGHT_TITULO)
 	private String titulo;
 	
 	@Required
 	@MaxLength(value = 450)
-	@Column(name = "CONTENT", length = max_LENGHT_DESCRICAO)
+	@Column(name = "CONTENT", length = MAX_LENGHT_DESCRICAO)
 	private String descricao;
 
 	@Temporal(value = TemporalType.DATE)
@@ -119,7 +119,7 @@ public class Evento {
 		if (titulo == null){
 			throw new EventoInvalidoException("Parametro nulo");
 		}
-		if (titulo.length() > max_LENGHT_TITULO){
+		if (titulo.length() > MAX_LENGHT_TITULO){
 			throw new EventoInvalidoException("Título longo");
 		}
 		this.titulo = titulo;
@@ -129,7 +129,7 @@ public class Evento {
 		if (descricao == null){
 			throw new EventoInvalidoException("Parametro nulo");
 		}
-		if (descricao.length() > max_LENGHT_DESCRICAO){
+		if (descricao.length() > MAX_LENGHT_DESCRICAO){
 			throw new EventoInvalidoException("Descrição longa");
 		}		
 		this.descricao = descricao;
