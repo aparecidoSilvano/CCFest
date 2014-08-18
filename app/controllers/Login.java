@@ -25,7 +25,12 @@ public class Login extends Controller {
 	
 	@Transactional
 	public static Result authenticate() {
-		Usuario u = loginForm.bindFromRequest().get();
+		Usuario u;
+		try {
+			u = loginForm.bindFromRequest().get();
+		} catch (IllegalStateException e) {
+			return badRequest(login.render(loginForm));
+		}
 		
 		String email = u.getEmail();
 		String senha = u.getSenha();

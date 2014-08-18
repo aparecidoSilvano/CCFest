@@ -22,8 +22,13 @@ public class Registro extends Controller {
     
 	@Transactional
 	public static Result registrar() {
+		Usuario u;
+		try {
+			u = registroForm.bindFromRequest().get();
+		} catch (IllegalStateException e) {
+			return badRequest(registro.render(registroForm));
+		}
 		
-		Usuario u = registroForm.bindFromRequest().get();
 		if (registroForm.hasErrors() || validate(u.getEmail())) {
 			flash("fail", "Email já está em uso");
             return badRequest(registro.render(registroForm));

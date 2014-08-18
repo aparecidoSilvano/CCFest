@@ -25,7 +25,17 @@
         
     </head>
 
-   <div class="col-sm-4 col-sm-offset-4">
+
+<div class="container">
+	<div class="col-md-12" style="height:80px;margin-top:10px;margin-bottom:10px;border-radius:4px;opacity:.7">
+		<div class="row">
+			<a href="#" style="color:white !important" onclick="mySwiper.swipeTo(0);">
+			<i class="fa fa-laptop col-sm-1" style="font-size:80px"></i>
+			<h1 class="col-sm-11" style="margin-top:12px;font-size:50px">&nbsp;&nbsp;&nbsp;<b>CCFest</b></h1>
+			</a>
+		</div>
+	</div>
+	<div class="col-sm-4 col-sm-offset-4">
    @if(flash.contains("fail")) {
    		<p class="bg-danger" style="">
         	@flash.get("fail")
@@ -51,4 +61,6 @@
 	       <a class="btn btn-info" style="float:right;" href="/login"> Login</a>
 	   </div>
 	}
+</div>
+   
  
