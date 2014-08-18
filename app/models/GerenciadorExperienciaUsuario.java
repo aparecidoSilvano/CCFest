@@ -8,7 +8,15 @@ import javax.persistence.Id;
 public abstract class GerenciadorExperienciaUsuario {
 	@Id
 	@GeneratedValue
-	Long id;
+	private Long id;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public abstract int calculaExperiencia(Usuario usuario);
 }

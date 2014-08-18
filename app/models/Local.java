@@ -11,7 +11,7 @@ import models.exceptions.LocalException;
 public class Local {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	long id;
+	private long id;
 
 	
 	private String nomeLocal;
@@ -83,6 +83,14 @@ public class Local {
 		return comoChegar;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	/**
 	 * @param descricao the descricao to set
 	 * @throws LocalException 

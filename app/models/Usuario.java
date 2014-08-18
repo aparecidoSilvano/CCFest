@@ -16,27 +16,23 @@ import play.data.validation.Constraints.Required;
 
 @Entity(name = "Usuario")
 public class Usuario {
-	private final int MAX_LENGHT_NOME = 70;
-	private final int MAX_LENGHT_EMAIL = 70;
+	private final int max_LENGHT_NOME = 70;
+	private final int max_LENGHT_EMAIL = 70;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	Long id;
+	private Long id;
 	
-	public Long getId() {
-		return id;
-	}
-	
-	private final String EMAILPATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+	private final String email_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	@Email
-	@MaxLength(value = MAX_LENGHT_NOME)
+	@MaxLength(value = max_LENGHT_NOME)
 	private String email;
 	
 	private String senha;
 	
-	@MaxLength(value = MAX_LENGHT_EMAIL)
+	@MaxLength(value = max_LENGHT_EMAIL)
 	private String nome = "";
 	
 	@Required
@@ -67,10 +63,10 @@ public class Usuario {
 		if (email == null){
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
-		if (!email.matches(EMAILPATTERN)){
+		if (!email.matches(email_PATTERN)){
 			throw new PessoaInvalidaException("Email inválido");
 		}
-		if (email.length() > MAX_LENGHT_EMAIL){
+		if (email.length() > max_LENGHT_EMAIL){
 			throw new PessoaInvalidaException("Email longo");
 		}
 		this.email = email;
@@ -101,7 +97,7 @@ public class Usuario {
 		if (nome == null){
 			throw new PessoaInvalidaException("Parametro nulo");
 		}
-		if (nome.length() > MAX_LENGHT_NOME){
+		if (nome.length() > max_LENGHT_NOME){
 			throw new PessoaInvalidaException("Nome longo");
 		}
 		this.nome = nome;
@@ -151,6 +147,14 @@ public class Usuario {
 	
 	public int getNumEvetosAdim() {
 		return numEvetosAdim;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

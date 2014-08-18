@@ -26,7 +26,6 @@ import play.data.Form;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
-import scala.Enumeration.Val;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
