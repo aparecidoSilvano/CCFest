@@ -1,3 +1,4 @@
+@(usuario: models.Usuario)
 <!-- Modal -->
 <div style="color: black" class="modal fade" id="modalParticipar"
 	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -12,9 +13,9 @@
 			<div class="modal-body">
 				<form method="POST" id="form-participar">
 					<input id="form-evento-id" type="hidden" />
-					<input type="text" class="form-control" name="nome" placeholder="Digite seu nome" maxlength="70"/>
+					<input type="text" class="form-control" name="nome" maxlength="70" value="@usuario.getNome()"/>
 					<br>
-					<input type="email" class="form-control" name="email" placeholder="Digite seu email" maxlength="70"/>
+					<input type="email" class="form-control" name="email" maxlength="70" value="@usuario.getEmail()" readonly/>
 				</form>
 			</div>
 			<div class="modal-footer">

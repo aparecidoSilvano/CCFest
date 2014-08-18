@@ -114,7 +114,6 @@ public class EventoController extends Controller {
 		Usuario usuarioLogado = Application.getUsuarioLogado();
 		
 		Evento evento = Application.getDao().findByEntityId(Evento.class, id);
-		
 		try {
 			evento.addParticipante(usuarioLogado);
 			Application.getDao().merge(usuarioLogado);

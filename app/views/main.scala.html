@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)(usuario: models.Usuario)(content: Html)
 
 <!DOCTYPE html>
 
@@ -32,7 +32,7 @@
 			</div>
 		</div>
         @content
-        @modalParticipar()
+        @modalParticipar(usuario)
         @modalMaisInformacoes()
         <div class='notifications top-right'></div>
     </body>

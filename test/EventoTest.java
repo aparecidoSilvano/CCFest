@@ -20,9 +20,7 @@ import models.exceptions.PessoaInvalidaException;
 import org.junit.Before;
 import org.junit.Test;
 
-import base.AbstractTest;
-
-public class EventoTest {
+public class EventoTest{
 	private List<Tema> temas;
 	
 	@Before
@@ -175,10 +173,8 @@ public class EventoTest {
 			assertEquals((int)e2.getTotalDeParticipantes(), 1);
 			
 		} catch (EventoInvalidoException e) {
-			System.out.println(e);
 			fail();
 		} catch (ImpossivelAddParticipante e) {
-			System.out.println(e);
 			fail();
 		} catch (PessoaInvalidaException e) {
 			fail();
@@ -191,7 +187,7 @@ public class EventoTest {
 	public void deveAddUsuarioMaisExperiente(){
 		try {
 			Usuario u1 = new Usuario("jose@gmail.com", "12344", "jose", new GerenteExperienciaNormal());
-			Usuario u2 = new Usuario("maria.maria@gmail.com", "97878", "maria", new GerenteExperienciaNormal());
+			Usuario u2 = new Usuario("pedro89@gmail.com", "pedro123", "pedro", new GerenteExperienciaNormal());
 			Usuario u3 = new Usuario("lucas@gmail.com", "12345", "lucas", new GerenteExperienciaNormal());
 			Usuario u4 = new Usuario("lucia@gmail.com", "jkui232H", "lucia", new GerenteExperienciaNormal());
 			Usuario u5 = new Usuario("joice.silva@gmail.com", "12345", "joice", new GerenteExperienciaNormal());
@@ -206,19 +202,20 @@ public class EventoTest {
 			// ele ganhou experiência.
 			assertEquals(2, u5.getExperiencia());
 			
-			e1.addParticipante(u1);		e1.addParticipante(u2);		e1.addParticipante(u3);
-			e1.addParticipante(u4);		e1.addParticipante(u5);		//e1.addParticipante(u6);
+			e1.addParticipante(u1);
+			e1.addParticipante(u2);
+			e1.addParticipante(u3);
+			e1.addParticipante(u4);		
+			e1.addParticipante(u5);
 			
 			assertEquals((int) e1.getTotalDeParticipantes(), 4);
 			
 			// ele retirou o usuario 4 para inserir o 5.
 			assertFalse(e1.getParticipantes().contains(u4));
 			assertTrue(e1.getParticipantes().contains(u5));
-		
 		} catch (EventoInvalidoException e) {
 			fail();
 		} catch (ImpossivelAddParticipante e) {
-			System.out.println(e.getMessage());
 			fail();
 		} catch (PessoaInvalidaException e) {
 			fail();
@@ -245,12 +242,12 @@ public class EventoTest {
 			e1.addParticipante(u1);		e1.addParticipante(u2);			e1.addParticipante(u3);
 			e1.addParticipante(u4);		e1.addParticipante(u5);
 			
-			assertEquals((int)e1.getTotalDeParticipantes(), 1);				
+			assertEquals(4, (int)e1.getTotalDeParticipantes());				
 		} catch (EventoInvalidoException e) {
 			fail();
 		} catch (ImpossivelAddParticipante e) {
 			// confere se realemnte não foi inserido o usuario
-			assertEquals(e1.getParticipantes().size(), 4);
+			assertEquals(4, e1.getParticipantes().size());
 		} catch (PessoaInvalidaException e) {
 			fail();
 		} catch (LocalException e) {
@@ -281,10 +278,7 @@ public class EventoTest {
 			u3.incrementaParticipacoes();
 			assertEquals(1, u3.getExperiencia());
 			
-			/*
-			 * Repare que u4 e u5 possuem a mesma experiência,
-			 * logo u5 não deve participar do evento.
-			 */
+			// Logo, repare que a experiêcia de u5 almentou, pois ele foi confirmado no evento
 			assertEquals(0, u4.getExperiencia());
 			assertEquals(0, u5.getExperiencia());
 			
@@ -304,6 +298,33 @@ public class EventoTest {
 		} catch (PessoaInvalidaException e) {
 			fail();
 		} catch (LocalException e) {
+			fail();
+		}
+	}
+	
+	@Test
+	public void deveAddParticipanteEmVariosEventos(){
+		try {
+			Local l = new Local("aúditorio central", 4, "na ufcg");
+			
+			Evento e1 = new Evento("evento teste1", "evento para testes",
+					new Date(), l, temas, new GerentePrioridadeExperiencia());
+			Evento e2 = new Evento("evento teste2", "evento para testes",
+					new Date(), l, temas, new GerentePrioridadeExperiencia());
+			
+			Usuario u1 = new Usuario("jose@gmail.com", "12344", "jose", new GerenteExperienciaNormal());
+			
+			e1.addParticipante(u1);		e2.addParticipante(u1);
+			
+			assertEquals(1, (int)e1.getTotalDeParticipantes());
+			assertEquals(1, (int)e2.getTotalDeParticipantes());
+		} catch (LocalException e) {
+			fail();
+		} catch (EventoInvalidoException e) {
+			fail();
+		} catch (PessoaInvalidaException e) {
+			fail();
+		} catch (ImpossivelAddParticipante e) {
 			fail();
 		}
 	}

@@ -1,6 +1,6 @@
 @(usuario: Usuario)
 
-@main("CCFest"){
+@main("CCFest")(usuario){
 <div style="position: relative; z-index: 1000; float: right; margin-right: 150px; margin-top: -50px;">
 	<h4>
 		<p>Seja bem-vindo, <b>@(usuario.getNome())</b>.

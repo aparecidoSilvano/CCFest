@@ -53,6 +53,8 @@ $(document).on('ready', function(event) {
 							modal.modal('show');
 						});
 						
+						
+												
 						$('#eventos-principal').append(table.find('tr'));
 					}
 				}else{
@@ -179,12 +181,12 @@ function createValidations(){
         },
         messages:{
             nome :{
-            	required: "Nome é obrigatório."
+            	required: "Nome Ã© obrigatÃ³rio."
             },
             
             email:{
-            	required: "Email é obrigatório.",
-            	regex: "Digite um email válido."
+            	required: "Email Ã© obrigatÃ³rio.",
+            	regex: "Digite um email vÃ¡lido."
             }
             
         }
@@ -210,18 +212,18 @@ function createValidations(){
         },
         messages:{
         	titulo:{ 
-                required: "É necessário um título.",
-                maxlength: "O título deve conter no máximo 30 caracteres."
+                required: "Ã‰ necessÃ¡rio um tÃ­tulo.",
+                maxlength: "O tÃ­tulo deve conter no mÃ¡ximo 30 caracteres."
             },
             data:{ 
-                required: "A data é obrigatoria."
+                required: "A data Ã© obrigatoria."
             },
             descricao:{
-            	required: "É necessário uma descrição.",
-                maxlength: "A descrição deve conter no máximo 350 caracteres."
+            	required: "Ã‰ necessÃ¡rio uma descriÃ§Ã£o.",
+                maxlength: "A descriÃ§Ã£o deve conter no mÃ¡ximo 350 caracteres."
             },
             'temas[]':{
-            	required: "É necessário escolher pelo menos 1 tema."
+            	required: "Ã‰ necessÃ¡rio escolher pelo menos 1 tema."
             }            
         }
          
