@@ -2,11 +2,9 @@ package controllers;
 
 import java.util.List;
 
-import models.GerenteExperienciaNormal;
 import models.Usuario;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
-import models.exceptions.PessoaInvalidaException;
 import play.db.jpa.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;

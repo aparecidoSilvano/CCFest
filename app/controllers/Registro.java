@@ -29,7 +29,7 @@ public class Registro extends Controller {
 			return badRequest(registro.render(registroForm));
 		}
 		
-		if (registroForm.hasErrors() || validate(u.getEmail())) {
+		if (registroForm.hasErrors() || !validate(u.getEmail())) {
 			flash("fail", "Email já está em uso");
             return badRequest(registro.render(registroForm));
         } else {
