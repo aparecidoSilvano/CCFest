@@ -41,7 +41,16 @@ public class Registro extends Controller {
         }
     }
 	
-	private static boolean validate(String email) {
-		return false;
+	private static boolean validate(String enderecoEmail) {
+		boolean status = false;
+
+		final String[] emails = enderecoEmail.split(",");
+		for (String email : emails) {
+			email = email.replace(" ", "");
+			if (email.matches(".+@.+\\.[a-z]+")) {
+				status = true;
+			}
+		}
+		return status;
 	}
 }

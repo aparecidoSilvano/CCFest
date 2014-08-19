@@ -18,6 +18,7 @@ import play.data.validation.Constraints.Required;
 public class Usuario {
 	private static final int MAX_LENGHT_NOME = 70;
 	private static final int MAX_LENGHT_EMAIL = 70;
+	private static final int MIN_LENGHT_SENHA = 5;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -84,7 +85,7 @@ public class Usuario {
 	public void setSenha(String senha) throws PessoaInvalidaException {
 		if(senha == null){
 			throw new PessoaInvalidaException("Parametro nulo");
-		}if(senha.length() < 5){
+		}if(senha.length() < MIN_LENGHT_SENHA){
 			throw new PessoaInvalidaException("Senha muito curta");
 		}		
 		this.senha = senha;

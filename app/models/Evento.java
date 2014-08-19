@@ -38,7 +38,7 @@ public class Evento {
 	private String titulo;
 	
 	@Required
-	@MaxLength(value = 450)
+	@MaxLength(value = MAX_LENGHT_DESCRICAO)
 	@Column(name = "CONTENT", length = MAX_LENGHT_DESCRICAO)
 	private String descricao;
 

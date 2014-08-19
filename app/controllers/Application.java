@@ -18,13 +18,11 @@ public class Application extends Controller {
 	private static Usuario usuarioLogado;
 
 	public static Usuario getUsuarioLogado() {
-		// veja que isso pode talvez quem sabe um dia retornar null.
 		return usuarioLogado;
 	}
 
 	@Transactional
 	public static Result index() {
-		povoaBD();
 		// session().clear();
 		List<Usuario> lista = dao.findByAttributeName("Usuario", "nome",
 				session().get("user"));
@@ -43,27 +41,6 @@ public class Application extends Controller {
 		return dao;
 	}
 
-	// só pra testar vou inserir uns users no bd.
-	private static void povoaBD() {
-		try {
-			Usuario u1 = new Usuario("jose.silva@gmail.com", "12345", "josé", new GerenteExperienciaNormal());
-			Usuario u2 = new Usuario("maria.silva@gmail.com", "12345", "maria", new GerenteExperienciaNormal());
-			Usuario u3 = new Usuario("silvana123@gmail.com", "12345", "silvana", new GerenteExperienciaNormal());
-			Usuario u4 = new Usuario("joao.jose@gmail.com", "12345", "joao", new GerenteExperienciaNormal());
-			Usuario u5 = new Usuario("jonas.silva@gmail.com", "12345", "jonas", new GerenteExperienciaNormal());
-			Usuario u6 = new Usuario("mariquinha@gmail.com", "12345",
-					"mariquinha", new GerenteExperienciaNormal());
 
-			dao.persist(u1);
-			dao.persist(u2);
-			dao.persist(u3);
-			dao.persist(u4);
-			dao.persist(u5);
-			dao.persist(u6);
-
-		} catch (PessoaInvalidaException e) {
-			
-		}
-	}
 
 }
