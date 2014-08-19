@@ -131,7 +131,7 @@ $(document).on('ready', function(event) {
 					
 					$('.top-right').notify({
 						 message : {
-						 	text : 'Evento criado com sucesso'
+						 	text : 'Ok. Tudo certo!'
 						 },
 						 type : "success"
 					 }).show(); 
@@ -139,7 +139,7 @@ $(document).on('ready', function(event) {
 				error: function (){
 					 $('.top-right').notify({
 						 message : {
-						 	text : 'Erro ao criar o evento'
+						 	text : 'Você já está participando desse evento!'
 						 },
 						 type : "danger"
 					 }).show(); 
@@ -187,12 +187,12 @@ function createValidations(){
         },
         messages:{
             nome :{
-            	required: "Nome Ã© obrigatÃ³rio."
+            	required: "Nome é obrigatório."
             },
             
             email:{
-            	required: "Email Ã© obrigatÃ³rio.",
-            	regex: "Digite um email vÃ¡lido."
+            	required: "Email é obrigatório.",
+            	regex: "Digite um email válido."
             }
             
         }
@@ -218,18 +218,18 @@ function createValidations(){
         },
         messages:{
         	titulo:{ 
-                required: "Ã‰ necessÃ¡rio um tÃ­tulo.",
-                maxlength: "O tÃ­tulo deve conter no mÃ¡ximo 30 caracteres."
+                required: "É necessário um título.",
+                maxlength: "O título deve conter no máximo 30 caracteres."
             },
             data:{ 
-                required: "A data Ã© obrigatoria."
+                required: "A data é obrigatoria."
             },
             descricao:{
-            	required: "Ã‰ necessÃ¡rio uma descriÃ§Ã£o.",
-                maxlength: "A descriÃ§Ã£o deve conter no mÃ¡ximo 350 caracteres."
+            	required: "É necessário uma descrição.",
+                maxlength: "A descriçãoo deve conter no máximo 350 caracteres."
             },
             'temas[]':{
-            	required: "Ã‰ necessÃ¡rio escolher pelo menos 1 tema."
+            	required: "É necessário escolher pelo menos 1 tema."
             }            
         }
          
